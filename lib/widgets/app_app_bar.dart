@@ -12,8 +12,11 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    // Cart? cart = context.watch<CartBloc>().state.cart;
-    Cart? cart=null;
+
+    Cart? cart = context.watch<CartBloc>().state.cart;
+
+
+
 
     return AppBar(
       backgroundColor: colorScheme.primaryContainer,

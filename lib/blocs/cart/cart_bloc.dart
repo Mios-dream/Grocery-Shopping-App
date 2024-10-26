@@ -1,11 +1,8 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:models/models.dart';
-
 import '../../repositories/cart_repository.dart';
-
 part 'cart_event.dart';
 part 'cart_state.dart';
 

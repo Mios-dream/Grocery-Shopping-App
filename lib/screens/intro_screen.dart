@@ -13,6 +13,7 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   // late VideoPlayerController _controller;
   ImageProvider introImage = const AssetImage('assets/images/intro.jpg');
+  Timer? timer;
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
 
   void _navigateToMainScreen() {
-    Timer(const Duration(seconds: 2), () {
+    timer = Timer(const Duration(seconds: 2), () {
       context.goNamed('home');
     });
   }
@@ -111,6 +112,7 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   void dispose() {
     // 取消任何可能存在的异步操作或定时器
+    timer?.cancel();
     super.dispose();
   }
 }

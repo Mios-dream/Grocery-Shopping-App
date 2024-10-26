@@ -82,19 +82,19 @@ class Category extends Equatable {
       id: '1',
       name: 'Fruits',
       description: 'Fresh fruits',
-      imageUrl: 'https://source.unsplash.com/random/?fruit',
+      imageUrl: 'https://seopic.699pic.com/photo/50050/6251.jpg_wh1200.jpg',
     ),
     Category(
       id: '2',
       name: 'Vegetables',
       description: 'Fresh vegetables',
-      imageUrl: 'https://source.unsplash.com/random/?vegetable',
+      imageUrl: 'https://seopic.699pic.com/photo/50050/6251.jpg_wh1200.jpg',
     ),
     Category(
       id: '3',
       name: 'Dairy',
       description: 'Dairy products',
-      imageUrl: 'https://source.unsplash.com/random/?dairy',
+      imageUrl: 'https://seopic.699pic.com/photo/50050/6251.jpg_wh1200.jpg',
     ),
   ];
 }

@@ -16,6 +16,7 @@ class CartScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     Cart? cart = context.watch<CartBloc>().state.cart;
+
     int totalQuantity = cart?.totalQuantity ?? 0;
 
     return Scaffold(
@@ -174,7 +175,8 @@ class _CartBottomNavBar extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
-                'USD ${context.watch<CartBloc>().state.cart?.totalPrice.toStringAsFixed(2) ?? 0.0}',
+                // 'USD ${context.watch<CartBloc>().state.cart?.totalPrice.toStringAsFixed(2) ?? 0.0}',
+                'USD 0.0',
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium!

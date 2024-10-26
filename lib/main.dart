@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery_shopping_app/repositories/cart_repository.dart';
 
+import 'blocs/cart/cart_bloc.dart';
 import 'blocs/home/home_bloc.dart';
 import 'navigation/app_router.dart';
 import 'repositories/category_repository.dart';
@@ -15,9 +17,13 @@ void main() {
   final ProductRepository productRepository =
       ProductRepository(apiClient: apiClient);
 
+  final CartRepository cartRepository =
+  CartRepository(apiClient: apiClient);
+
   runApp(MyApp(
     categoryRepository: categoryRepository,
     productRepository: productRepository,
+    cartRepository: cartRepository,
   ));
 }
 
@@ -26,10 +32,12 @@ class MyApp extends StatelessWidget {
     super.key,
     required this.categoryRepository,
     required this.productRepository,
+    required this.cartRepository,
   });
 
   final CategoryRepository categoryRepository;
   final ProductRepository productRepository;
+  final CartRepository cartRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +45,7 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider.value(value: categoryRepository),
         RepositoryProvider.value(value: productRepository),
+        RepositoryProvider.value(value: cartRepository),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -44,8 +53,10 @@ class MyApp extends StatelessWidget {
             create: (context) => HomeBloc(
               categoryRepository: context.read<CategoryRepository>(),
               productRepository: context.read<ProductRepository>(),
+
             )..add(const HomeLoadEvent()),
           ),
+          BlocProvider<CartBloc>(create: (_) => CartBloc(cartRepository: cartRepository)),
         ],
         child: MaterialApp.router(
           title: 'Flutter Demo',
