@@ -10,11 +10,9 @@ import 'repositories/category_repository.dart';
 import 'repositories/product_repository.dart';
 import 'services/api_client.dart';
 
-
-
 void main() {
   // 此处换成api的ip地址
-  const String baseUrl = 'http://10.203.15.9:8080';
+  const String baseUrl = 'http://10.0.2.2:8080';
   final ApiClient apiClient = ApiClient(baseUrl: baseUrl);
   final CategoryRepository categoryRepository =
       CategoryRepository(apiClient: apiClient);
@@ -22,8 +20,7 @@ void main() {
   final ProductRepository productRepository =
       ProductRepository(apiClient: apiClient);
 
-  final CartRepository cartRepository =
-  CartRepository(apiClient: apiClient);
+  final CartRepository cartRepository = CartRepository(apiClient: apiClient);
 
   runApp(MyApp(
     categoryRepository: categoryRepository,
@@ -58,10 +55,10 @@ class MyApp extends StatelessWidget {
             create: (context) => HomeBloc(
               categoryRepository: context.read<CategoryRepository>(),
               productRepository: context.read<ProductRepository>(),
-
             )..add(const HomeLoadEvent()),
           ),
-          BlocProvider<CartBloc>(create: (_) => CartBloc(cartRepository: cartRepository)),
+          BlocProvider<CartBloc>(
+              create: (_) => CartBloc(cartRepository: cartRepository)),
         ],
         child: MaterialApp.router(
           title: 'Flutter Demo',

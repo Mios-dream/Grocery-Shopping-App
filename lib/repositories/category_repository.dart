@@ -18,7 +18,6 @@ class CategoryRepository {
 
   Future<List<Category>> getCategories() async {
     final response = await apiClient.getCategories();
-    print(response);
     if (response is List) {
       return response.map((json) {
         return Category.fromJson(json as Map<String, dynamic>);

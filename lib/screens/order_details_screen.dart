@@ -190,7 +190,7 @@ class OrderDetailsScreen extends StatelessWidget {
               onPressed: () {},
               style: FilledButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48.0),
-                backgroundColor: colorScheme.background,
+                backgroundColor: colorScheme.surface,
                 foregroundColor: colorScheme.primary,
               ),
               child: Text(

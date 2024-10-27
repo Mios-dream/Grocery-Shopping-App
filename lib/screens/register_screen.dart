@@ -111,7 +111,7 @@ class _FirstNameInput extends StatelessWidget {
         labelStyle: textTheme.bodyLarge!.copyWith(
           color: Colors.white,
         ),
-        fillColor: colorScheme.background.withAlpha(100),
+        fillColor: colorScheme.surface.withAlpha(100),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: const BorderSide(color: Colors.white),
@@ -145,7 +145,7 @@ class _LastNameInput extends StatelessWidget {
         labelStyle: textTheme.bodyLarge!.copyWith(
           color: Colors.white,
         ),
-        fillColor: colorScheme.background.withAlpha(100),
+        fillColor: colorScheme.surface.withAlpha(100),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: const BorderSide(color: Colors.white),
@@ -179,7 +179,7 @@ class _EmailInput extends StatelessWidget {
         labelStyle: textTheme.bodyLarge!.copyWith(
           color: Colors.white,
         ),
-        fillColor: colorScheme.background.withAlpha(100),
+        fillColor: colorScheme.surface.withAlpha(100),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: const BorderSide(color: Colors.white),
@@ -254,7 +254,7 @@ class _DateOfBirthInputState extends State<_DateOfBirthInput> {
         labelStyle: textTheme.bodyLarge!.copyWith(
           color: Colors.white,
         ),
-        fillColor: colorScheme.background.withAlpha(100),
+        fillColor: colorScheme.surface.withAlpha(100),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: const BorderSide(color: Colors.white),
@@ -444,7 +444,7 @@ class _PhoneNumberInput extends StatelessWidget {
         labelStyle: textTheme.bodyLarge!.copyWith(
           color: Colors.white,
         ),
-        fillColor: colorScheme.background.withAlpha(100),
+        fillColor: colorScheme.surface.withAlpha(100),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: const BorderSide(color: Colors.white),

@@ -78,23 +78,23 @@ class Category extends Equatable {
   }
 
   static List<Category> sampleData = [
-    Category(
+    const Category(
       id: '1',
       name: 'Fruits',
       description: 'Fresh fruits',
-      imageUrl: 'https://seopic.699pic.com/photo/50050/6251.jpg_wh1200.jpg',
+      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
     ),
-    Category(
+    const Category(
       id: '2',
       name: 'Vegetables',
       description: 'Fresh vegetables',
-      imageUrl: 'https://seopic.699pic.com/photo/50050/6251.jpg_wh1200.jpg',
+      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
     ),
-    Category(
+    const Category(
       id: '3',
       name: 'Dairy',
       description: 'Dairy products',
-      imageUrl: 'https://seopic.699pic.com/photo/50050/6251.jpg_wh1200.jpg',
+      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
     ),
   ];
 }

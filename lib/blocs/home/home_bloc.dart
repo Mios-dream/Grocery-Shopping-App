@@ -27,7 +27,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeLoadEvent event,
     Emitter<HomeState> emit,
   ) async {
-    print("调用 HomeBloc");
     emit(state.copyWith(status: HomeStatus.loading));
     try {
       await Future.delayed(const Duration(seconds: 2));
@@ -47,8 +46,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       );
     } catch (e) {
       emit(state.copyWith(status: HomeStatus.error));
-      print("error");
-      print(e);
     }
   }
 }
