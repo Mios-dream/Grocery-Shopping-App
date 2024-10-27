@@ -3,14 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_shopping_app/repositories/cart_repository.dart';
 
 import 'blocs/cart/cart_bloc.dart';
+
 import 'blocs/home/home_bloc.dart';
 import 'navigation/app_router.dart';
 import 'repositories/category_repository.dart';
 import 'repositories/product_repository.dart';
 import 'services/api_client.dart';
 
+
+
 void main() {
-  final ApiClient apiClient = ApiClient();
+  // 此处换成api的ip地址
+  const String baseUrl = 'http://10.203.15.9:8080';
+  final ApiClient apiClient = ApiClient(baseUrl: baseUrl);
   final CategoryRepository categoryRepository =
       CategoryRepository(apiClient: apiClient);
 

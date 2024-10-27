@@ -17,7 +17,7 @@ class OrderScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     Cart? cart = context.watch<CartBloc>().state.cart;
-    // Cart? cart=null;
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(

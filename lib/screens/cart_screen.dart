@@ -175,8 +175,8 @@ class _CartBottomNavBar extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
-                // 'USD ${context.watch<CartBloc>().state.cart?.totalPrice.toStringAsFixed(2) ?? 0.0}',
-                'USD 0.0',
+                'USD ${context.watch<CartBloc>().state.cart?.totalPrice.toStringAsFixed(2) ?? 0.0}',
+                // 'USD 0.0',
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium!

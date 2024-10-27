@@ -7,8 +7,9 @@ import 'package:http/http.dart' as http;
 class ApiClient {
   ApiClient({
     http.Client? httpClient,
+    required String baseUrl,
   }) : this._(
-          baseUrl: 'http://localhost:8080',
+          baseUrl: baseUrl,
           httpClient: httpClient,
         );
 

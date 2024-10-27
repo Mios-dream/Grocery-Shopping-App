@@ -10,19 +10,9 @@ abstract class HomeEvent extends Equatable {
 class HomeLoadEvent extends HomeEvent {
   const HomeLoadEvent();
 
-  @override
-  List<Object> get props => [];
-
-
-  //   数据加载
-
-
-
-
-
 }
 
-// class HomeRefreshEvent extends HomeEvent {
-//   const HomeRefreshEvent();
-// }
+class HomeRefreshEvent extends HomeEvent {
+  const HomeRefreshEvent();
+}
 
