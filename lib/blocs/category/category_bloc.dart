@@ -4,19 +4,19 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 
-import '../../repositories/category_repository.dart';
-import '../../repositories/product_repository.dart';
+import '../../repo/category_repo.dart';
+import '../../repo/product_repo.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  final CategoryRepository _categoryRepository;
-  final ProductRepository _productRepository;
+  final CategoryRepo _categoryRepository;
+  final ProductRepo _productRepository;
 
   CategoryBloc({
-    required CategoryRepository categoryRepository,
-    required ProductRepository productRepository,
+    required CategoryRepo categoryRepository,
+    required ProductRepo productRepository,
   })  : _categoryRepository = categoryRepository,
         _productRepository = productRepository,
         super(const CategoryState()) {
