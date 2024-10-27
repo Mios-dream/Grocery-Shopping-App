@@ -12,6 +12,7 @@ import '../screens/order_screen.dart';
 import '../screens/register_screen.dart';
 import '../screens/scan_screen.dart';
 import '../screens/search_screen.dart';
+import '../screens/user_screen.dart';
 
 class AppRouter {
   late final GoRouter router = GoRouter(
@@ -103,6 +104,13 @@ class AppRouter {
             },
             child: const SearchScreen(),
           );
+        },
+      ),
+      GoRoute(
+        name: 'user',
+        path: '/user',
+        builder: (BuildContext context, GoRouterState state) {
+          return const UserScreen();
         },
       ),
     ],

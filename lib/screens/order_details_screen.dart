@@ -14,8 +14,12 @@ class OrderDetailsScreen extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.network(
-            'https://images.unsplash.com/photo-1514425263458-109317cc1321?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3464&q=80',
+          // child: Image.network(
+          //   'https://images.unsplash.com/photo-1514425263458-109317cc1321?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3464&q=80',
+          //   fit: BoxFit.cover,
+          // ),
+          child: Image.asset(
+            'assets/images/background.jpg',
             fit: BoxFit.cover,
           ),
         ),
@@ -23,7 +27,7 @@ class OrderDetailsScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             elevation: 0.0,
-            leading: BackButton(),
+            leading: const BackButton(),
             actions: [
               TextButton.icon(
                 onPressed: () {},

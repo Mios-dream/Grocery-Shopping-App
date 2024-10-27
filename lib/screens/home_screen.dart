@@ -60,13 +60,22 @@ class HomeScreen extends StatelessWidget {
                               margin: const EdgeInsets.only(right: 8.0),
                               child: Column(
                                 children: [
-                                  Image.network(
-                                    state.popularCategories[index].imageUrl ??
-                                        'https://via.placeholder.com/80',
+                                  // 从网络加载图片
+                                  // Image.network(
+                                  //   state.popularCategories[index].imageUrl ??
+                                  //       'https://via.placeholder.com/80',
+                                  //   height: 80,
+                                  //   width: 80,
+                                  //   fit: BoxFit.cover,
+                                  // ),
+                                  // 从本地加载图片
+                                  Image.asset(
+                                    'assets/images/test.jpg',
                                     height: 80,
                                     width: 80,
                                     fit: BoxFit.cover,
                                   ),
+
                                   const SizedBox(height: 8.0),
                                   Text(
                                     state.popularCategories[index].name,

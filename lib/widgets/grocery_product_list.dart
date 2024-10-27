@@ -29,8 +29,14 @@ class GroceryProductList extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(
-                  product.imageUrl,
+                // Image.network(
+                //   product.imageUrl,
+                //   height: 160,
+                //   width: 160,
+                //   fit: BoxFit.cover,
+                // ),
+                Image.asset(
+                  "assets/images/test.jpg",
                   height: 160,
                   width: 160,
                   fit: BoxFit.cover,

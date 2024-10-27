@@ -20,7 +20,7 @@ class AppBottomNavBar extends StatelessWidget {
       ),
       child: NavigationBarTheme(
         data: NavigationBarThemeData(
-          labelTextStyle: MaterialStatePropertyAll(
+          labelTextStyle: WidgetStatePropertyAll(
             Theme.of(context)
                 .textTheme
                 .bodySmall!
@@ -50,7 +50,7 @@ class AppBottomNavBar extends StatelessWidget {
                 context.goNamed('orders');
                 break;
               case 4:
-                // context.goNamed('...');
+                context.goNamed('user');
                 break;
               default:
                 context.goNamed('home');
@@ -93,7 +93,7 @@ class AppBottomNavBar extends StatelessWidget {
               padding: EdgeInsets.only(top: 8.0),
               child: NavigationDestination(
                 selectedIcon: Icon(Icons.person, color: Colors.white),
-                icon: Icon(Icons.person_2_outlined, color: Colors.white),
+                icon: Icon(Icons.person_outline, color: Colors.white),
                 label: 'Profile',
               ),
             ),
