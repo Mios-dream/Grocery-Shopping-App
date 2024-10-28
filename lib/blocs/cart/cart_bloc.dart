@@ -2,15 +2,15 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:models/models.dart';
-import '../../repositories/cart_repository.dart';
+import '../../repo/cart_repo.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  final CartRepository _cartRepository;
+  final CartRepo _cartRepository;
 
   CartBloc({
-    required CartRepository cartRepository,
+    required CartRepo cartRepository,
   })  : _cartRepository = cartRepository,
         super(const CartState()) {
     on<LoadCart>(_onLoadCart);
