@@ -29,7 +29,7 @@ class AppBottomNavBar extends StatelessWidget {
         ),
         child: NavigationBar(
           backgroundColor: Theme.of(context).colorScheme.secondary,
-          height: 50,
+          height: 80,
           selectedIndex: index,
           indicatorColor: Colors.transparent,
           onDestinationSelected: (value) {
@@ -58,7 +58,7 @@ class AppBottomNavBar extends StatelessWidget {
           },
           destinations: const <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 8.0),
+              padding: EdgeInsets.only(top: 1),
               child: NavigationDestination(
                 selectedIcon: Icon(Icons.home, color: Colors.white),
                 icon: Icon(Icons.home_outlined, color: Colors.white),
@@ -66,7 +66,7 @@ class AppBottomNavBar extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 8.0),
+              padding: EdgeInsets.only(top: 1),
               child: NavigationDestination(
                 selectedIcon: Icon(Icons.shopping_bag, color: Colors.white),
                 icon: Icon(Icons.shopping_bag_outlined, color: Colors.white),
