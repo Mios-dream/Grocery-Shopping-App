@@ -13,7 +13,7 @@ class Order extends Equatable {
   final String status;
   final Address deliveryAddress;
 
-  const Order({
+  Order({
     required this.id,
     required this.userId,
     required this.products,
@@ -53,7 +53,7 @@ class Order extends Equatable {
       totalAmount: json['totalAmount'] ?? 0.0,
       orderDate: DateTime.parse(json['orderDate'] ?? ''),
       status: json['status'] ?? '',
-      deliveryAddress: json['deliveryAddress'] ?? '',
+      deliveryAddress: Address.fromJson(json['deliveryAddress'] as Map<String,dynamic>),
     );
   }
 
@@ -68,6 +68,7 @@ class Order extends Equatable {
       'deliveryAddress': deliveryAddress,
     };
   }
+
 
   static List<Order> sampleData = [
     Order(

@@ -21,11 +21,11 @@ class GroceryProductOfTheDay extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        image: const DecorationImage(
-          // image: NetworkImage(
-          //   product.imageUrl,
-          // ),
-          image: AssetImage('assets/images/test.jpg'),
+        image: DecorationImage(
+          image: NetworkImage(
+            product.imageUrl,
+          ),
+          // image: AssetImage('assets/images/test.jpg'),
           fit: BoxFit.cover,
         ),
       ),

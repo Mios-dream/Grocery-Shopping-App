@@ -18,7 +18,9 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: colorScheme.primaryContainer,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
         icon: const Icon(Icons.menu),
       ),
       centerTitle: true,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:grocery_shopping_app/widget/drawer.dart';
 import 'package:models/models.dart';
 
 import '../blocs/cart/cart_bloc.dart';
@@ -38,6 +39,7 @@ class CategoryView extends StatelessWidget {
 
     return Scaffold(
       appBar: const AppAppBar(),
+      drawer: const HomeDrawer(),
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {
           if (state.status == CategoryStatus.initial ||

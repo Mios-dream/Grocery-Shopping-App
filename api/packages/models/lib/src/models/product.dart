@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
@@ -109,7 +110,8 @@ class Product extends Equatable {
     };
   }
 
-  static const empty = Product(
+
+  static var empty = Product(
     id: '',
     name: '',
     description: '',
@@ -123,6 +125,8 @@ class Product extends Equatable {
     reviews: [],
   );
 
+
+  // 这些应该为上传时获取，这里暂时读取本地
   static List<Product> sampleData = [
     Product(
       id: const Uuid().v4(),
@@ -130,7 +134,7 @@ class Product extends Equatable {
       description: 'Fresh and juicy apples.',
       price: 1.99,
       discountedPrice: 1.49,
-      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
+      imageUrl:  "http://10.203.15.9:8080/images/apple.jpg",
       categoryId: '1',
       aisleId: '1',
       stock: 100,
@@ -145,7 +149,7 @@ class Product extends Equatable {
       description: 'Sweet bananas.',
       price: 0.99,
       discountedPrice: 0.79,
-      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
+      imageUrl: 'http://10.203.15.9:8080/images/banana.jpg',
       categoryId: '1',
       aisleId: '1',
       stock: 200,
@@ -160,7 +164,7 @@ class Product extends Equatable {
       description: 'Juicy and tangy oranges.',
       price: 1.49,
       discountedPrice: 1.29,
-      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
+      imageUrl: 'http://10.203.15.9:8080/images/orange.jpg',
       categoryId: '1',
       aisleId: '2',
       stock: 150,
@@ -173,7 +177,7 @@ class Product extends Equatable {
       description: 'Sweet seedless grapes.',
       price: 2.49,
       discountedPrice: 1.99,
-      imageUrl: 'https://i.imgur.com/RaVJuLr.jpegs',
+      imageUrl: 'http://10.203.15.9:8080/images/grapes.jpg',
       categoryId: '1',
       aisleId: '2',
       stock: 90,
@@ -186,7 +190,7 @@ class Product extends Equatable {
       description: 'Ripe and juicy tomatoes.',
       price: 0.99,
       discountedPrice: 0.79,
-      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
+      imageUrl: 'http://10.203.15.9:8080/images/tomato.jpg',
       categoryId: '2',
       aisleId: '3',
       stock: 200,
@@ -199,7 +203,7 @@ class Product extends Equatable {
       description: 'Fresh and green broccoli.',
       price: 1.29,
       discountedPrice: 1.09,
-      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
+      imageUrl: 'http://10.203.15.9:8080/images/broccoli.jpg',
       categoryId: '2',
       aisleId: '3',
       stock: 100,
@@ -212,7 +216,7 @@ class Product extends Equatable {
       description: 'Fresh farm chicken.',
       price: 5.99,
       discountedPrice: 4.99,
-      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
+      imageUrl: 'http://10.203.15.9:8080/images/chicken.jpg',
       categoryId: '3',
       aisleId: '4',
       stock: 50,
@@ -225,7 +229,7 @@ class Product extends Equatable {
       description: 'Fresh Atlantic salmon.',
       price: 10.99,
       discountedPrice: 9.99,
-      imageUrl: 'https://i.imgur.com/RaVJuLr.jpeg',
+      imageUrl: 'http://10.203.15.9:8080/images/salmon.jpg',
       categoryId: '3',
       aisleId: '4',
       stock: 30,

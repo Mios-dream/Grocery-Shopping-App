@@ -6,6 +6,7 @@ import 'package:models/models.dart';
 import '../blocs/home/home_bloc.dart';
 import '../widget/app_bar.dart';
 import '../widget/app_bottom_nav_bar.dart';
+import '../widget/drawer.dart';
 import '../widget/grocery_loading_indicator.dart';
 import '../widget/grocery_product_list.dart';
 import '../widget/grocery_product_of_the_day.dart';
@@ -20,6 +21,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: const AppAppBar(),
+      drawer: const HomeDrawer(),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state.status == HomeStatus.initial ||
@@ -61,20 +63,20 @@ class HomeScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   // 从网络加载图片
-                                  // Image.network(
-                                  //   state.popularCategories[index].imageUrl ??
-                                  //       'https://via.placeholder.com/80',
-                                  //   height: 80,
-                                  //   width: 80,
-                                  //   fit: BoxFit.cover,
-                                  // ),
-                                  // 从本地加载图片
-                                  Image.asset(
-                                    'assets/images/test.jpg',
+                                  Image.network(
+                                    state.popularCategories[index].imageUrl ??
+                                        'https://via.placeholder.com/80',
                                     height: 80,
                                     width: 80,
                                     fit: BoxFit.cover,
                                   ),
+                                  // 从本地加载图片
+                                  // Image.asset(
+                                  //   'assets/images/test.jpg',
+                                  //   height: 80,
+                                  //   width: 80,
+                                  //   fit: BoxFit.cover,
+                                  // ),
 
                                   const SizedBox(height: 8.0),
                                   Text(
@@ -140,3 +142,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+

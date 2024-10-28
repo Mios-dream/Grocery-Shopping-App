@@ -75,6 +75,13 @@ class ApiClient {
     );
   }
 
+  Future<dynamic> getOrders() {
+    final uri = Uri.parse('$_baseUrl/orders');
+    return _handleRequest(
+          (headers) => _httpClient.get(uri, headers: headers),
+    );
+  }
+
   Future<dynamic> _handleRequest(
     Future<http.Response> Function(Map<String, String>) request,
   ) async {

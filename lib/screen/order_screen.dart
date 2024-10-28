@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:grocery_shopping_app/blocs/orders/orders_bloc.dart';
 import 'package:models/models.dart';
+
 
 import '../blocs/cart/cart_bloc.dart';
 import '../util/datetime_format.dart';
 import '../widget/app_bottom_nav_bar.dart';
+import '../widget/drawer.dart';
 import '../widget/grocery_modal.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -18,15 +21,22 @@ class OrderScreen extends StatelessWidget {
 
     Cart? cart = context.watch<CartBloc>().state.cart;
 
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawer: const HomeDrawer(),
         appBar: AppBar(
           backgroundColor: colorScheme.primaryContainer,
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.menu),
-          ),
+          // 可以确保获取的上下文包含 Scaffold，以解决 context 丢失的问题
+          leading: Builder(builder: (BuildContext innerContext) {
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(innerContext).openDrawer();
+              },
+              icon: const Icon(Icons.menu),
+            );
+          }),
           centerTitle: true,
           title: Column(
             children: [
@@ -97,8 +107,12 @@ class _PastOrders extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    // List<Order> sampleData=[];
+    // List<Order>? orders=context.watch<OrdersBloc>().state.orders;
 
-    return Column(
+    return BlocBuilder<OrdersBloc, OrdersState>(
+        builder: (context, state) {
+          return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,9 +148,9 @@ class _PastOrders extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: Order.sampleData.length,
+            itemCount: state.orders ==null?0:state.orders?.length,
             itemBuilder: (context, index) {
-              final order = Order.sampleData[index];
+              final order = state.orders![index];
 
               return Container(
                 padding: const EdgeInsets.all(16.0),
@@ -239,7 +253,7 @@ class _PastOrders extends StatelessWidget {
         ),
       ],
     );
-  }
+  });}
 }
 
 class _PendingOrders extends StatelessWidget {
