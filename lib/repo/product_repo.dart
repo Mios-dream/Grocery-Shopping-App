@@ -1,4 +1,4 @@
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 import '../service/api_client.dart';
 
@@ -19,8 +19,8 @@ class ProductRepo {
     }
   }
 
-  Future<List<Product>> getProductsByCategoryId(String categoryId) async {
-    final response = await apiClient.getProductsByCategoryId(categoryId);
+  Future<List<Product>> getProductsByCategoryID(String categoryId) async {
+    final response = await apiClient.getProductsByCategoryID(categoryId);
 
     if (response is List) {
       return response

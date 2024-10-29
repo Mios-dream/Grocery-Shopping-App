@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:cart_repository/cart_repository.dart';
+import 'package:cart_repo/cart_repo.dart';
 import 'package:dart_frog/dart_frog.dart';
 
 FutureOr<Response> onRequest(
@@ -26,7 +26,7 @@ Future<Response> _delete(
   String userId,
   String itemId,
 ) async {
-  final cartRepository = context.read<CartRepository>();
-  await cartRepository.removeFromCart(userId, itemId);
+  final cartRepo = context.read<CartRepo>();
+  await cartRepo.removeFromCart(userId, itemId);
   return Response.json(body: 'The item has been removed from the cart.');
 }

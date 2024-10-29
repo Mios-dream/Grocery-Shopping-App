@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 import '../blocs/home/home_bloc.dart';
-import '../widget/app_bar.dart';
+import '../widget/app_top_bar.dart';
 import '../widget/app_bottom_nav_bar.dart';
-import '../widget/drawer.dart';
+import '../widget/app_sidebar.dart';
 import '../widget/grocery_loading_indicator.dart';
 import '../widget/grocery_product_list.dart';
 import '../widget/grocery_product_of_the_day.dart';
@@ -20,8 +20,8 @@ class HomeScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: const AppAppBar(),
-      drawer: const HomeDrawer(),
+      appBar: const TopBar(),
+      drawer: const Sidebar(),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state.status == HomeStatus.initial ||
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                               context.goNamed(
                                 'category',
                                 pathParameters: {
-                                  'categoryId':
+                                  'categoryID':
                                       state.popularCategories[index].id,
                                 },
                               );
@@ -62,7 +62,6 @@ class HomeScreen extends StatelessWidget {
                               margin: const EdgeInsets.only(right: 8.0),
                               child: Column(
                                 children: [
-                                  // 从网络加载图片
                                   Image.network(
                                     state.popularCategories[index].imageUrl ??
                                         'https://via.placeholder.com/80',
@@ -70,9 +69,8 @@ class HomeScreen extends StatelessWidget {
                                     width: 80,
                                     fit: BoxFit.cover,
                                   ),
-                                  // 从本地加载图片
                                   // Image.asset(
-                                  //   'assets/images/test.jpg',
+                                  //   'path/to/image',
                                   //   height: 80,
                                   //   width: 80,
                                   //   fit: BoxFit.cover,
@@ -118,7 +116,7 @@ class HomeScreen extends StatelessWidget {
           }
         },
       ),
-      bottomNavigationBar: const AppBottomNavBar(index: 0),
+      bottomNavigationBar: const BottomNavBar(index: 0),
     );
   }
 
@@ -142,5 +140,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-

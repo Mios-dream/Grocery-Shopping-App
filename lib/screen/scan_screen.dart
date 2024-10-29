@@ -33,7 +33,7 @@ class ScanScreen extends StatelessWidget {
         ],
       ),
       body: const GroceryBarcodeScanner(),
-      bottomNavigationBar: const AppBottomNavBar(index: 2),
+      bottomNavigationBar: const BottomNavBar(index: 2),
     );
   }
 }

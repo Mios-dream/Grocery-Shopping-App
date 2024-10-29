@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
-import 'package:product_repository/product_repository.dart';
+import 'package:product_repo/product_repo.dart';
 
 FutureOr<Response> onRequest(RequestContext context, String productId) async {
   switch (context.request.method) {
@@ -19,7 +19,7 @@ FutureOr<Response> onRequest(RequestContext context, String productId) async {
 }
 
 Future<Response> _get(RequestContext context, String productId) async {
-  final productRepository = context.read<ProductRepository>();
-  final products = await productRepository.getProductById(productId);
+  final productRepo = context.read<ProductRepo>();
+  final products = await productRepo.getProductByID(productId);
   return Response.json(body: products);
 }

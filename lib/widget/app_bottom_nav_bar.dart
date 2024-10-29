@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class AppBottomNavBar extends StatelessWidget {
-  const AppBottomNavBar({
+class BottomNavBar extends StatelessWidget {
+  const BottomNavBar({
     super.key,
     required this.index,
   });
@@ -38,16 +38,14 @@ class AppBottomNavBar extends StatelessWidget {
                 context.goNamed('home');
                 break;
               case 1:
-                context.goNamed(
-                  'category',
-                  pathParameters: {'categoryId': '1'},
-                );
+                context
+                    .goNamed('category', pathParameters: {'categoryID': '1'});
                 break;
               case 2:
                 context.goNamed('scan');
                 break;
               case 3:
-                context.goNamed('orders');
+                context.goNamed('order');
                 break;
               case 4:
                 context.goNamed('user');

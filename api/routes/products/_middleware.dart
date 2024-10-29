@@ -1,10 +1,10 @@
 import 'package:dart_frog/dart_frog.dart';
-import 'package:product_repository/product_repository.dart';
+import 'package:product_repo/product_repo.dart';
 
-final _productRepository = ProductRepository();
+final _productRepo = ProductRepo();
 
 Handler middleware(Handler handler) {
   return handler
       .use(requestLogger())
-      .use(provider<ProductRepository>((_) => _productRepository));
+      .use(provider<ProductRepo>((_) => _productRepo));
 }

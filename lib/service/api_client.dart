@@ -22,7 +22,7 @@ class ApiClient {
   final String _baseUrl;
   final http.Client _httpClient;
 
-  Future<dynamic> getCategoryById(categoryId) {
+  Future<dynamic> getCategoryByID(categoryId) {
     final uri = Uri.parse('$_baseUrl/categories/$categoryId');
     return _handleRequest(
       (headers) => _httpClient.get(uri, headers: headers),
@@ -36,7 +36,7 @@ class ApiClient {
     );
   }
 
-  Future<dynamic> getProductsByCategoryId(String categoryId) {
+  Future<dynamic> getProductsByCategoryID(String categoryId) {
     final uri = Uri.parse('$_baseUrl/categories/$categoryId/products');
     return _handleRequest(
       (headers) => _httpClient.get(uri, headers: headers),
@@ -78,7 +78,7 @@ class ApiClient {
   Future<dynamic> getOrders() {
     final uri = Uri.parse('$_baseUrl/orders');
     return _handleRequest(
-          (headers) => _httpClient.get(uri, headers: headers),
+      (headers) => _httpClient.get(uri, headers: headers),
     );
   }
 
@@ -93,7 +93,6 @@ class ApiClient {
       if (response.statusCode != HttpStatus.ok) {
         throw Exception('${response.statusCode}, error: ${body['message']}');
       }
-
       return body;
     } on TimeoutException {
       throw Exception('Request timeout. Please try again');

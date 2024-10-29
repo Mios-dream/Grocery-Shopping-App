@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 import '../../repo/cart_repo.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -42,9 +42,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     emit(state.copyWith(status: CartStatus.loading));
 
     try {
-      await _cartRepository.addToCart(event.userId, event.product);
+      await _cartRepository.addToCart(event.userID, event.product);
       emit(state.copyWith(status: CartStatus.loaded));
-      add(LoadCart(event.userId));
+      add(LoadCart(event.userID));
     } catch (_) {
       emit(state.copyWith(status: CartStatus.error));
     }

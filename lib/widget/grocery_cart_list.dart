@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 import '../blocs/cart/cart_bloc.dart';
 
@@ -81,7 +81,7 @@ class GroceryCartList extends StatelessWidget {
                           onPressed: () {
                             context.read<CartBloc>().add(
                                   RemoveFromCart(
-                                      userId: '12345', cartItem: cartItem),
+                                      userId: '001', cartItem: cartItem),
                                 );
                           },
                           icon: const Icon(Icons.delete),
@@ -92,7 +92,7 @@ class GroceryCartList extends StatelessWidget {
                           onPressed: () {
                             context.read<CartBloc>().add(
                                   AddToCart(
-                                      userId: '12345',
+                                      userID: '001',
                                       product: cartItem.product),
                                 );
                           },
