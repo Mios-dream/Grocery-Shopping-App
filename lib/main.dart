@@ -12,15 +12,12 @@ import 'repo/order_repo.dart';
 import 'service/api_client.dart';
 
 void main() {
-  // 此处换成api的ip地址
-  const String baseUrl = 'http://10.0.2.2:8080';
+  const String baseUrl = 'http://10.0.2.2:8080'; // API url for the local server
   final ApiClient apiClient = ApiClient(baseUrl: baseUrl);
+
   final CategoryRepo categoryRepo = CategoryRepo(apiClient: apiClient);
-
   final ProductRepo productRepo = ProductRepo(apiClient: apiClient);
-
   final CartRepo cartRepo = CartRepo(apiClient: apiClient);
-
   final OrderRepo ordersRepo = OrderRepo(apiClient: apiClient);
 
   runApp(GrocifyApp(
@@ -64,12 +61,12 @@ class GrocifyApp extends StatelessWidget {
           BlocProvider<CartBloc>(
               create: (_) => CartBloc(cartRepository: cartRepo)),
           BlocProvider<OrderBloc>(
-            create: (_) => OrderBloc(orderRepo: orderRepo)
-              ..add(const OrderLoadEvent()),
+            create: (_) =>
+                OrderBloc(orderRepo: orderRepo)..add(const OrderLoadEvent()),
           ),
         ],
         child: MaterialApp.router(
-          title: 'Flutter Demo',
+          title: 'Grocify',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
             useMaterial3: true,

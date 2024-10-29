@@ -213,7 +213,12 @@ class _PastOrders extends StatelessWidget {
                         children: [
                           Expanded(
                             child: FilledButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pushNamed(
+                                  'category',
+                                  pathParameters: {'categoryID': "1"},
+                                );
+                              },
                               icon: const Icon(Icons.add_shopping_cart),
                               label: const Text('Reorder'),
                             ),
@@ -224,7 +229,7 @@ class _PastOrders extends StatelessWidget {
                               onPressed: () {
                                 context.pushNamed(
                                   'order-details',
-                                  pathParameters: {'orderId': order.id},
+                                  pathParameters: {'orderID': order.id},
                                 );
                               },
                               style: OutlinedButton.styleFrom(
