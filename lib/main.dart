@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grocery_shopping_app/repo/cart_repo.dart';
+import 'package:grocify/repo/cart_repo.dart';
 
 import 'blocs/cart/cart_bloc.dart';
 import 'blocs/home/home_bloc.dart';

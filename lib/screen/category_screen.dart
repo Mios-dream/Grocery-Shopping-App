@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:grocery_shopping_app/widget/app_sidebar.dart';
+import 'package:grocify/widget/app_sidebar.dart';
 import 'package:model/model.dart';
 
 import '../blocs/cart/cart_bloc.dart';
