@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Step, Stepper;
+import 'package:go_router/go_router.dart';
 
 import '../widget/app_stepper.dart';
 
@@ -41,8 +42,10 @@ class OrderDetailScreen extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                margin: const EdgeInsets.all(16.0),
-                padding: const EdgeInsets.all(24.0),
+                margin: const EdgeInsets.only(
+                    left: 16.0, top: 24.0, right: 16.0, bottom: 24.0),
+                padding: const EdgeInsets.only(
+                    left: 24.0, top: 24.0, right: 24.0, bottom: 36.0),
                 decoration: BoxDecoration(
                   color: colorScheme.inverseSurface,
                   borderRadius: BorderRadius.circular(16.0),
@@ -94,6 +97,7 @@ class OrderDetailScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 16.0),
                     const SizedBox(
                         height: 70,
                         child: HorizontalStepper(
@@ -167,21 +171,7 @@ class OrderDetailScreen extends StatelessWidget {
                                   '2800 Wilshire Blvd, Santa Monica, CA 90403',
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
-                              ),
-                              Step(
-                                icon: Icons.shopping_cart,
-                                title: Text(
-                                  'Pick Up',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall!
-                                      .copyWith(fontWeight: FontWeight.bold),
-                                ),
-                                content: Text(
-                                  'Order placed on Nov 10th at 4:27pm',
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ),
+                              )
                             ],
                           )
                         ]),
@@ -193,14 +183,16 @@ class OrderDetailScreen extends StatelessWidget {
             ],
           ),
           bottomNavigationBar: BottomAppBar(
-            height: 80,
+            height: 96,
             color: colorScheme.primaryContainer,
             elevation: 0.0,
-            padding: const EdgeInsets.all(
-              16
-            ),
+            padding: const EdgeInsets.only(
+                left: 16.0, top: 24.0, right: 24.0, bottom: 16.0),
             child: FilledButton(
-              onPressed: () {},
+              onPressed: () {
+                context
+                    .goNamed('category', pathParameters: {'categoryID': '1'});
+              },
               style: FilledButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48.0),
                 backgroundColor: colorScheme.surface,
