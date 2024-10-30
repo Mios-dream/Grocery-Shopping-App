@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 import '../../repo/category_repo.dart';
 import '../../repo/product_repo.dart';
@@ -15,10 +15,10 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final ProductRepo _productRepository;
 
   CategoryBloc({
-    required CategoryRepo categoryRepository,
-    required ProductRepo productRepository,
-  })  : _categoryRepository = categoryRepository,
-        _productRepository = productRepository,
+    required CategoryRepo categoryRepo,
+    required ProductRepo productRepo,
+  })  : _categoryRepository = categoryRepo,
+        _productRepository = productRepo,
         super(const CategoryState()) {
     on<CategoryLoadEvent>(_onLoadEvent);
   }
@@ -29,14 +29,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   ) async {
     emit(state.copyWith(status: CategoryStatus.loading));
     try {
-      await Future.delayed(const Duration(seconds: 2));
-      final categories = _categoryRepository.getCategoryById(event.categoryId);
-      final products = _productRepository.getProductsByCategoryId(
-        event.categoryId,
+      await Future.delayed(const Duration(seconds: 1));
+      final categories = _categoryRepository.getCategoryById(event.categoryID);
+      final products = _productRepository.getProductsByCategoryID(
+        event.categoryID,
       );
 
       final results = await Future.wait([categories, products]);
-
       emit(
         state.copyWith(
           status: CategoryStatus.loaded,

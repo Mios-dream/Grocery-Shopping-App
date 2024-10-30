@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 import '../blocs/cart/cart_bloc.dart';
 import '../widget/grocery_cart_list.dart';
@@ -23,25 +23,13 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: colorScheme.inversePrimary,
         centerTitle: true,
-        title: Column(
-          children: [
-            Text(
-              'Pickup',
-              style: textTheme.bodySmall,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Location 1',
-                  style: textTheme.bodyLarge!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(width: 8.0),
-                const Icon(Icons.arrow_drop_down),
-              ],
-            ),
-          ],
+        toolbarHeight: 80.0,
+        title: Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Grocery Cart',
+            style: textTheme.headlineMedium,
+          ),
         ),
       ),
       body: BlocBuilder<CartBloc, CartState>(

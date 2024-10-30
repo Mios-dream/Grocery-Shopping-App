@@ -15,7 +15,7 @@ class OrderDetailsScreen extends StatelessWidget {
       children: [
         Positioned.fill(
           // child: Image.network(
-          //   'https://images.unsplash.com/photo-1514425263458-109317cc1321?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3464&q=80',
+          //   'img_url',
           //   fit: BoxFit.cover,
           // ),
           child: Image.asset(
@@ -66,7 +66,7 @@ class OrderDetailsScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 4.0),
                             Text(
-                              'Prepping',
+                              'Preparing',
                               style: textTheme.headlineSmall!.copyWith(
                                 color: colorScheme.onInverseSurface,
                                 fontWeight: FontWeight.bold,

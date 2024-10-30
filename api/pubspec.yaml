@@ -1,5 +1,5 @@
 name: api
-description: An new Dart Frog application
+description: A new Dart Frog application
 version: 1.0.0+1
 publish_to: none
 
@@ -7,15 +7,17 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  cart_repository:
-    path: packages/cart_repository
-  category_repository:
-    path: packages/category_repository
+  cart_repo:
+    path: packages/cart_repo
+  category_repo:
+    path: packages/category_repo
   dart_frog: ^1.0.0
-  product_repository:
-    path: packages/product_repository
-
+  model:
+    path: packages/model
   network_info_plus: ^6.1.0
+  product_repo:
+    path: packages/product_repo
+  uuid: ^4.5.1
 
 dev_dependencies:
   mocktail: ^1.0.0

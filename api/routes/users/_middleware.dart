@@ -1,10 +1,10 @@
-import 'package:cart_repository/cart_repository.dart';
+import 'package:cart_repo/cart_repo.dart';
 import 'package:dart_frog/dart_frog.dart';
 
-final _cartRepository = CartRepository();
+final _cartRepo = CartRepo();
 
 Handler middleware(Handler handler) {
   return handler
       .use(requestLogger())
-      .use(provider<CartRepository>((_) => _cartRepository));
+      .use(provider<CartRepo>((_) => _cartRepo));
 }

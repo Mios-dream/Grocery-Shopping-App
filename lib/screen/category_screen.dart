@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:grocery_shopping_app/widget/drawer.dart';
-import 'package:models/models.dart';
+import 'package:grocify/widget/app_sidebar.dart';
+import 'package:model/model.dart';
 
 import '../blocs/cart/cart_bloc.dart';
 import '../blocs/category/category_bloc.dart';
 import '../repo/category_repo.dart';
 import '../repo/product_repo.dart';
-import '../widget/app_bar.dart';
+import '../widget/app_top_bar.dart';
 import '../widget/app_bottom_nav_bar.dart';
 import '../widget/grocery_modal.dart';
 
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key, required this.categoryId});
+  const CategoryScreen({super.key, required this.categoryID});
 
-  final String categoryId;
+  final String categoryID;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CategoryBloc(
-        categoryRepository: context.read<CategoryRepo>(),
-        productRepository: context.read<ProductRepo>(),
-      )..add(CategoryLoadEvent(categoryId: categoryId)),
+        categoryRepo: context.read<CategoryRepo>(),
+        productRepo: context.read<ProductRepo>(),
+      )..add(CategoryLoadEvent(categoryID: categoryID)),
       child: const CategoryView(),
     );
   }
@@ -38,8 +38,8 @@ class CategoryView extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: const AppAppBar(),
-      drawer: const HomeDrawer(),
+      appBar: const TopBar(),
+      drawer: const Sidebar(),
       body: BlocBuilder<CategoryBloc, CategoryState>(
         builder: (context, state) {
           if (state.status == CategoryStatus.initial ||
@@ -119,7 +119,7 @@ class CategoryView extends StatelessWidget {
                                       onPressed: () {
                                         context.read<CartBloc>().add(
                                               AddToCart(
-                                                userId: '12345',
+                                                userID: '001',
                                                 product: product,
                                               ),
                                             );
@@ -154,7 +154,7 @@ class CategoryView extends StatelessWidget {
           }
         },
       ),
-      bottomNavigationBar: const AppBottomNavBar(index: 1),
+      bottomNavigationBar: const BottomNavBar(index: 1),
     );
   }
 }
@@ -180,7 +180,6 @@ class _CategoryFilterPickerModalState
     checkboxValues = <CategoryPreferences, bool>{
       for (var v in CategoryPreferences.values) v: false
     };
-
     super.initState();
   }
 

@@ -8,10 +8,10 @@ abstract class CategoryEvent extends Equatable {
 }
 
 class CategoryLoadEvent extends CategoryEvent {
-  final String categoryId;
+  final String categoryID;
 
-  const CategoryLoadEvent({required this.categoryId});
+  const CategoryLoadEvent({required this.categoryID});
 
   @override
-  List<Object> get props => [categoryId];
+  List<Object> get props => [categoryID];
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 import '../../repo/category_repo.dart';
 import '../../repo/product_repo.dart';
@@ -15,10 +15,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final ProductRepo _productRepository;
 
   HomeBloc({
-    required CategoryRepo categoryRepository,
-    required ProductRepo productRepository,
-  })  : _categoryRepository = categoryRepository,
-        _productRepository = productRepository,
+    required CategoryRepo categoryRepo,
+    required ProductRepo productRepo,
+  })  : _categoryRepository = categoryRepo,
+        _productRepository = productRepo,
         super(const HomeState()) {
     on<HomeLoadEvent>(_onLoadEvent);
   }

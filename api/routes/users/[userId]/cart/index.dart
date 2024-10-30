@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:cart_repository/cart_repository.dart';
+import 'package:cart_repo/cart_repo.dart';
 import 'package:dart_frog/dart_frog.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 FutureOr<Response> onRequest(RequestContext context, String userId) async {
   switch (context.request.method) {
@@ -20,7 +20,7 @@ FutureOr<Response> onRequest(RequestContext context, String userId) async {
 }
 
 Future<Response> _get(RequestContext context, String userId) async {
-  final cartRepository = context.read<CartRepository>();
+  final cartRepository = context.read<CartRepo>();
   final cartItems = await cartRepository.getCartItems(userId);
   return Response.json(body: cartItems);
 }
@@ -30,8 +30,8 @@ Future<Response> _post(RequestContext context, String userId) async {
 
   try {
     final product = Product.fromJson(body);
-    final cartRepository = context.read<CartRepository>();
-    final cartItem = await cartRepository.addToCart(userId, product);
+    final cartRepo = context.read<CartRepo>();
+    final cartItem = await cartRepo.addToCart(userId, product);
     return Response.json(body: cartItem.toJson());
   } catch (err) {
     return Response(

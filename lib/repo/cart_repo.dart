@@ -1,4 +1,4 @@
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 import '../service/api_client.dart';
 

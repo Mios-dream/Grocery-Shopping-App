@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
+import 'package:go_router/go_router.dart';
 
 class GroceryProductOfTheDay extends StatelessWidget {
   const GroceryProductOfTheDay({
@@ -49,7 +50,9 @@ class GroceryProductOfTheDay extends StatelessWidget {
           ),
           const SizedBox(height: 8.0),
           FilledButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              context.goNamed('category', pathParameters: {'categoryID': '1'});
+            },
             style: FilledButton.styleFrom(
               minimumSize: const Size.fromHeight(48.0),
             ),

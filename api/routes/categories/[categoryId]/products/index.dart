@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
-import 'package:product_repository/product_repository.dart';
+import 'package:product_repo/product_repo.dart';
 
 FutureOr<Response> onRequest(
   RequestContext context,
@@ -21,8 +21,8 @@ FutureOr<Response> onRequest(
   }
 }
 
-Future<Response> _get(RequestContext context, String categoryId) async {
-  final productRepository = context.read<ProductRepository>();
-  final products = await productRepository.getProductsByCategoryId(categoryId);
+Future<Response> _get(RequestContext context, String categoryID) async {
+  final productRepo = context.read<ProductRepo>();
+  final products = await productRepo.getProductsByCategoryID(categoryID);
   return Response.json(body: products);
 }

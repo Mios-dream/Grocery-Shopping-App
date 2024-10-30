@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:category_repository/category_repository.dart';
+import 'package:category_repo/category_repo.dart';
 import 'package:dart_frog/dart_frog.dart';
 
 FutureOr<Response> onRequest(
@@ -22,7 +22,7 @@ FutureOr<Response> onRequest(
 }
 
 Future<Response> _get(RequestContext context, String categoryId) async {
-  final categoryRepository = context.read<CategoryRepository>();
+  final categoryRepository = context.read<CategoryRepo>();
   final category = await categoryRepository.getCategoryById(categoryId);
   return Response.json(body: category);
 }

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dart_frog/dart_frog.dart';
+import 'package:model/model.dart';
 import 'package:uuid/uuid.dart';
-import 'package:models/models.dart';
 
 FutureOr<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
@@ -23,7 +23,7 @@ Future<Response> _get(RequestContext context) async {
     id: const Uuid().v4(),
     userId: const Uuid().v4(),
     products: Product.sampleData,
-    totalAmount: 25.0,
+    totalAmount: 25,
     orderDate: DateTime.now(),
     status: 'processing',
     deliveryAddress: Address.sampleData[0],
@@ -32,7 +32,7 @@ Future<Response> _get(RequestContext context) async {
       id: const Uuid().v4(),
       userId: const Uuid().v4(),
       products: Product.sampleData,
-      totalAmount: 70.0,
+      totalAmount: 70,
       orderDate: DateTime.now(),
       status: 'shipped',
       deliveryAddress: Address.sampleData[0],

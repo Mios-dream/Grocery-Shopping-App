@@ -1,5 +1,5 @@
 import '../service/api_client.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 class OrderRepo {
   final ApiClient apiClient;
@@ -14,7 +14,6 @@ class OrderRepo {
         return Order.fromJson(json as Map<String, dynamic>);
       }).toList();
     } else {
-      print('Failed to load categories from the API');
       throw Exception('Failed to load categories from the API');
     }
   }

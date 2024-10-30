@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 import '../blocs/cart/cart_bloc.dart';
 
@@ -65,7 +65,7 @@ class GroceryProductList extends StatelessWidget {
                       onPressed: () {
                         context
                             .read<CartBloc>()
-                            .add(AddToCart(userId: '12345', product: product));
+                            .add(AddToCart(userID: '001', product: product));
                       },
                       icon: const Icon(Icons.add),
                     ),

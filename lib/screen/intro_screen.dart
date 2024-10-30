@@ -26,12 +26,10 @@ class _IntroScreenState extends State<IntroScreen> {
     //     // Ensure the correct widget is built.
     //     setState(() {});
     //   });
-    _navigateToMainScreen();
+    _navigateToHome();
   }
 
-
-
-  void _navigateToMainScreen() {
+  void _navigateToHome() {
     timer = Timer(const Duration(seconds: 2), () {
       context.goNamed('home');
     });
@@ -51,17 +49,21 @@ class _IntroScreenState extends State<IntroScreen> {
               child: SizedBox(
                 // width: ,
                 // height: _controller.value.size.height,
-                child: Image(image: introImage,fit: BoxFit.cover,),
+                child: Image(
+                  image: introImage,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
           Center(
             child: Text(
-              'Grocery Shopping',
+              'GROCIFY',
               textAlign: TextAlign.center,
               style: textTheme.displayLarge!.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
               ),
             ),
           ),
@@ -111,7 +113,6 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   void dispose() {
-    // 取消任何可能存在的异步操作或定时器
     timer?.cancel();
     super.dispose();
   }

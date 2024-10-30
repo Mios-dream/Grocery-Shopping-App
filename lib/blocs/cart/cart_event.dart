@@ -17,16 +17,16 @@ class LoadCart extends CartEvent {
 }
 
 class AddToCart extends CartEvent {
-  final String userId;
+  final String userID;
   final Product product;
 
   const AddToCart({
-    required this.userId,
+    required this.userID,
     required this.product,
   });
 
   @override
-  List<Object> get props => [product, userId];
+  List<Object> get props => [product, userID];
 }
 
 class RemoveFromCart extends CartEvent {

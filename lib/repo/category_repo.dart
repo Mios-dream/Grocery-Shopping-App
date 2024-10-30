@@ -1,5 +1,5 @@
 import '../service/api_client.dart';
-import 'package:models/models.dart';
+import 'package:model/model.dart';
 
 class CategoryRepo {
   final ApiClient apiClient;
@@ -7,7 +7,7 @@ class CategoryRepo {
   const CategoryRepo({required this.apiClient});
 
   Future<Category> getCategoryById(String categoryId) async {
-    final response = await apiClient.getCategoryById(categoryId);
+    final response = await apiClient.getCategoryByID(categoryId);
 
     if (response is Map<String, dynamic>) {
       return Category.fromJson(response);
