@@ -66,7 +66,7 @@ class OrderDetailsScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 4.0),
                             Text(
-                              'Prepping',
+                              'Preparing',
                               style: textTheme.headlineSmall!.copyWith(
                                 color: colorScheme.onInverseSurface,
                                 fontWeight: FontWeight.bold,
