@@ -5,12 +5,12 @@ import 'package:dart_frog/dart_frog.dart';
 
 FutureOr<Response> onRequest(
   RequestContext context,
-  String userId,
-  String itemId,
+  String userID,
+  String itemID,
 ) async {
   switch (context.request.method) {
     case HttpMethod.delete:
-      return _delete(context, userId, itemId);
+      return _delete(context, userID, itemID);
     case HttpMethod.post:
     case HttpMethod.get:
     case HttpMethod.head:
@@ -23,10 +23,10 @@ FutureOr<Response> onRequest(
 
 Future<Response> _delete(
   RequestContext context,
-  String userId,
-  String itemId,
+  String userID,
+  String itemID,
 ) async {
   final cartRepo = context.read<CartRepo>();
-  await cartRepo.removeFromCart(userId, itemId);
+  await cartRepo.removeFromCart(userID, itemID);
   return Response.json(body: 'The item has been removed from the cart.');
 }
