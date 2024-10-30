@@ -93,24 +93,25 @@ class CategoryView extends StatelessWidget {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 0.8,
+                        childAspectRatio: 0.7,
                       ),
                       itemBuilder: (context, index) {
                         final product = state.categoryProducts[index];
                         return Container(
-                          width: 160,
                           margin: const EdgeInsets.only(right: 8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Stack(
                                 children: [
-                                  Image.network(
-                                    product.imageUrl,
-                                    height: 160,
-                                    width: 160,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Image.network(
+                                        product.imageUrl,
+                                        height: 160,
+                                        width: 160,
+                                        fit: BoxFit.cover,
+                                      )),
                                   Positioned(
                                     bottom: 8.0,
                                     right: 8.0,
