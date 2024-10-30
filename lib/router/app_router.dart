@@ -7,7 +7,7 @@ import '../screen/category_screen.dart';
 import '../screen/home_screen.dart';
 import '../screen/intro_screen.dart';
 import '../screen/login_screen.dart';
-import '../screen/order_details_screen.dart';
+import '../screen/order_detail_screen.dart';
 import '../screen/order_screen.dart';
 import '../screen/register_screen.dart';
 import '../screen/scan_screen.dart';
@@ -60,10 +60,10 @@ class AppRouter {
           },
           routes: [
             GoRoute(
-              name: 'order-details',
+              name: 'order-detail',
               path: 'orders/:orderID',
               builder: (BuildContext context, GoRouterState state) {
-                return const OrderDetailsScreen();
+                return const OrderDetailScreen();
               },
             ),
           ]),

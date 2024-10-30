@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:grocery_shopping_app/blocs/orders/orders_bloc.dart';
-import 'package:models/models.dart';
+import 'package:grocify/blocs/order/order_bloc.dart';
+import 'package:model/model.dart';
 
 import '../blocs/cart/cart_bloc.dart';
 import '../util/datetime_format.dart';
 import '../widget/app_bottom_nav_bar.dart';
-import '../widget/drawer.dart';
+import '../widget/app_sidebar.dart';
 import '../widget/grocery_modal.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -23,10 +23,9 @@ class OrderScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        drawer: const HomeDrawer(),
+        drawer: const Sidebar(),
         appBar: AppBar(
           backgroundColor: colorScheme.primaryContainer,
-          // 可以确保获取的上下文包含 Scaffold，以解决 context 丢失的问题
           leading: Builder(builder: (BuildContext innerContext) {
             return IconButton(
               onPressed: () {
@@ -92,7 +91,7 @@ class OrderScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: const AppBottomNavBar(index: 3),
+        bottomNavigationBar: const BottomNavBar(index: 3),
       ),
     );
   }
@@ -108,7 +107,7 @@ class _PastOrders extends StatelessWidget {
     // List<Order> sampleData=[];
     // List<Order>? orders=context.watch<OrdersBloc>().state.orders;
 
-    return BlocBuilder<OrdersBloc, OrdersState>(builder: (context, state) {
+    return BlocBuilder<OrderBloc, OrderState>(builder: (context, state) {
       return Column(
         children: [
           Row(
@@ -193,8 +192,10 @@ class _PastOrders extends StatelessWidget {
                           ...order.products
                               .take(4)
                               .map((product) => Expanded(
-                                    flex: 1,
-                                    child: AspectRatio(aspectRatio: 1,child: Container(
+                                  flex: 1,
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
                                       margin: const EdgeInsets.only(right: 4.0),
                                       child: Image.network(
                                         product.imageUrl,
@@ -202,9 +203,8 @@ class _PastOrders extends StatelessWidget {
                                         width: 60,
                                         fit: BoxFit.cover,
                                       ),
-                                    ),)
-
-                                  ))
+                                    ),
+                                  )))
                               .toList(),
                           const SizedBox(width: 4.0),
                           Text('+${order.products.length - 4} more'),
@@ -225,8 +225,8 @@ class _PastOrders extends StatelessWidget {
                             child: OutlinedButton(
                               onPressed: () {
                                 context.pushNamed(
-                                  'order-details',
-                                  pathParameters: {'orderId': order.id},
+                                  'order-detail',
+                                  pathParameters: {'orderID': order.id},
                                 );
                               },
                               style: OutlinedButton.styleFrom(

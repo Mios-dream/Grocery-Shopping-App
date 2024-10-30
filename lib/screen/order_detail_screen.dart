@@ -2,8 +2,8 @@ import 'package:flutter/material.dart' hide Step, Stepper;
 
 import '../widget/app_stepper.dart';
 
-class OrderDetailsScreen extends StatelessWidget {
-  const OrderDetailsScreen({super.key});
+class OrderDetailScreen extends StatelessWidget {
+  const OrderDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,6 @@ class OrderDetailsScreen extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-
                 margin: const EdgeInsets.all(16.0),
                 padding: const EdgeInsets.all(24.0),
                 decoration: BoxDecoration(
@@ -96,21 +95,18 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                const SizedBox(
-                      height: 70,
-                      child:
-                          HorizontalStepper(
-                            steps: [
-                              Step(
-                                icon: Icons.receipt_long,
-                                isCompleted: true,
-                              ),
-                              Step(icon: Icons.store),
-                              Step(icon: Icons.location_on),
-                            ],
-
-                      )
-                    ),
+                    const SizedBox(
+                        height: 70,
+                        child: HorizontalStepper(
+                          steps: [
+                            Step(
+                              icon: Icons.receipt_long,
+                              isCompleted: true,
+                            ),
+                            Step(icon: Icons.store),
+                            Step(icon: Icons.location_on),
+                          ],
+                        )),
                   ],
                 ),
               ),
@@ -141,53 +137,56 @@ class OrderDetailsScreen extends StatelessWidget {
                       ),
                       const Divider(),
                       const SizedBox(height: 16.0),
-                      Expanded(child: ListView(children: [
-                      Stepper(
-                        steps: [
-                          Step(
-                            icon: Icons.shopping_cart,
-                            title: Text(
-                              'Pick Up',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            content: Text(
-                              'Order placed on Nov 10th at 4:27pm',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                          Step(
-                            icon: Icons.location_on,
-                            title: Text(
-                              'Drop Off',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            content: Text(
-                              '2800 Wilshire Blvd, Santa Monica, CA 90403',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                          Step(
-                            icon: Icons.location_on,
-                            title: Text(
-                              'Drop Off',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            content: Text(
-                              '2800 Wilshire Blvd, Santa Monica, CA 90403',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                        ],
-                      )]),)
+                      Expanded(
+                        child: ListView(children: [
+                          Stepper(
+                            steps: [
+                              Step(
+                                icon: Icons.shopping_cart,
+                                title: Text(
+                                  'Pick Up',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                content: Text(
+                                  'Order placed on Nov 10th at 4:27pm',
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ),
+                              Step(
+                                icon: Icons.location_on,
+                                title: Text(
+                                  'Drop Off',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                content: Text(
+                                  '2800 Wilshire Blvd, Santa Monica, CA 90403',
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ),
+                              Step(
+                                icon: Icons.location_on,
+                                title: Text(
+                                  'Drop Off',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                content: Text(
+                                  '2800 Wilshire Blvd, Santa Monica, CA 90403',
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ),
+                            ],
+                          )
+                        ]),
+                      )
                     ],
                   ),
                 ),
