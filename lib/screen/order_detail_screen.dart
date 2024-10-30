@@ -7,7 +7,6 @@ class OrderDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -170,16 +169,16 @@ class OrderDetailScreen extends StatelessWidget {
                                 ),
                               ),
                               Step(
-                                icon: Icons.location_on,
+                                icon: Icons.shopping_cart,
                                 title: Text(
-                                  'Drop Off',
+                                  'Pick Up',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall!
                                       .copyWith(fontWeight: FontWeight.bold),
                                 ),
                                 content: Text(
-                                  '2800 Wilshire Blvd, Santa Monica, CA 90403',
+                                  'Order placed on Nov 10th at 4:27pm',
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
@@ -194,13 +193,11 @@ class OrderDetailScreen extends StatelessWidget {
             ],
           ),
           bottomNavigationBar: BottomAppBar(
-            height: 64,
+            height: 80,
             color: colorScheme.primaryContainer,
             elevation: 0.0,
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              top: 8.0,
+            padding: const EdgeInsets.all(
+              16
             ),
             child: FilledButton(
               onPressed: () {},

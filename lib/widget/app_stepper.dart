@@ -67,6 +67,7 @@ class Stepper extends StatelessWidget {
                   ],
                 ),
               ),
+
               Stack(
                 children: [
                   steps.length - 1 == i
@@ -82,9 +83,9 @@ class Stepper extends StatelessWidget {
                         ),
                   Container(
                     margin: const EdgeInsetsDirectional.only(
-                      start: 70.0,
+                      start: 100.0,
                       end: 24.0,
-                      bottom: 24.0,
+                      bottom: 40.0,
                     ),
                     child: Column(
                         children: [steps[i].content ?? const SizedBox()]),
