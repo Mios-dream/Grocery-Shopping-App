@@ -12,6 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   uuid: ^4.0.0
+  #  数据库
+  sqlite3: ^2.4.7
 
 dev_dependencies:
   flutter_test:
