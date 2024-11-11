@@ -25,6 +25,7 @@ dependencies:
   google_fonts: ^6.1.0
   #  数据库
   sqlite3: ^2.4.7
+  oktoast: ^3.4.0
 
 dev_dependencies:
   flutter_test:

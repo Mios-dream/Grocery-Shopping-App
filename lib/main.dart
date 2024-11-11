@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocify/repo/cart_repo.dart';
-
+import 'package:oktoast/oktoast.dart';
 import 'blocs/cart/cart_bloc.dart';
 import 'blocs/home/home_bloc.dart';
 import 'blocs/order/order_bloc.dart';
@@ -10,9 +10,10 @@ import 'repo/category_repo.dart';
 import 'repo/product_repo.dart';
 import 'repo/order_repo.dart';
 import 'service/api_client.dart';
+import 'config.dart';
 
 void main() {
-  const String baseUrl = 'http://10.0.2.2:8080'; // API url for the local server
+  const String baseUrl = Config.baseUrl; // API url for the local server
   final ApiClient apiClient = ApiClient(baseUrl: baseUrl);
 
   final CategoryRepo categoryRepo = CategoryRepo(apiClient: apiClient);
@@ -29,12 +30,13 @@ void main() {
 }
 
 class GrocifyApp extends StatelessWidget {
-  const GrocifyApp(
-      {super.key,
-      required this.categoryRepo,
-      required this.productRepo,
-      required this.cartRepo,
-      required this.orderRepo});
+  const GrocifyApp({
+    super.key,
+    required this.categoryRepo,
+    required this.productRepo,
+    required this.cartRepo,
+    required this.orderRepo,
+  });
 
   final CategoryRepo categoryRepo;
   final ProductRepo productRepo;
@@ -51,29 +53,30 @@ class GrocifyApp extends StatelessWidget {
         RepositoryProvider.value(value: orderRepo),
       ],
       child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => HomeBloc(
-              categoryRepo: context.read<CategoryRepo>(),
-              productRepo: context.read<ProductRepo>(),
-            )..add(const HomeLoadEvent()),
-          ),
-          BlocProvider<CartBloc>(
-              create: (_) => CartBloc(cartRepository: cartRepo)),
-          BlocProvider<OrderBloc>(
-            create: (_) =>
-                OrderBloc(orderRepo: orderRepo)..add(const OrderLoadEvent()),
-          ),
-        ],
-        child: MaterialApp.router(
-          title: 'Grocify',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
-            useMaterial3: true,
-          ),
-          routerConfig: AppRouter().router,
-        ),
-      ),
+          providers: [
+            BlocProvider(
+              create: (context) => HomeBloc(
+                categoryRepo: context.read<CategoryRepo>(),
+                productRepo: context.read<ProductRepo>(),
+              )..add(const HomeLoadEvent()),
+            ),
+            BlocProvider<CartBloc>(
+                create: (_) => CartBloc(cartRepository: cartRepo)),
+            BlocProvider<OrderBloc>(
+              create: (_) =>
+                  OrderBloc(orderRepo: orderRepo)..add(const OrderLoadEvent()),
+            ),
+          ],
+          child: OKToast(
+            child: MaterialApp.router(
+              title: 'Grocify',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
+                useMaterial3: true,
+              ),
+              routerConfig: AppRouter().router,
+            ),
+          )),
     );
   }
 }

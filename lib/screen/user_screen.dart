@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widget/app_bottom_nav_bar.dart';
 
@@ -55,7 +56,17 @@ class _UserScreenState extends State<UserScreen> {
             const SizedBox(height: 16),
             Expanded(
               child: Container(
+                width: double.infinity,
                 color: Colors.grey[200],
+                child: Center(
+                  child: SizedBox(
+                    width: 120,
+                    height: 50,
+                    child: ElevatedButton(onPressed: (){
+                      context.pushNamed('login');
+                    }, child: const Text("点击登录")),
+                  ),
+                ),
               ),
             ),
           ],

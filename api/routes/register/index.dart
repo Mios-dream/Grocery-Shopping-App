@@ -24,7 +24,7 @@ Future<Response> _get(RequestContext context) async {
   final response = await context.request.body();
   if (response.isEmpty) {
     return Response.json(
-      body: {'message': 'Invalid data'},
+      body: {'code': 400, 'message': 'Invalid data'},
     );
   }
   final data = jsonDecode(response) as Map<String, dynamic>;
@@ -32,19 +32,19 @@ Future<Response> _get(RequestContext context) async {
       data['email'] == null ||
       data['password_hash'] == null) {
     return Response.json(
-      body: {'message': 'Invalid data'},
+      body: {'code': 400, 'message': 'Invalid data'},
     );
   }
   try {
     DatabaseHelper().insertData(
-      data['username'] as String ,
-      data['email'] as String ,
-      data['password_hash'] as String ,
+      data['username'] as String,
+      data['email'] as String,
+      data['password_hash'] as String,
       phoneNumber: data['phone_number'] as String?,
     );
-    return Response.json(body: {'message': 'ok'});
+    return Response.json(body: {'code': 0, 'message': 'ok'});
   } catch (e) {
     print(e);
-    return Response.json(body: {'message': 'User already exists'});
+    return Response.json(body: {'code': 1, 'message': 'User already exists'});
   }
 }

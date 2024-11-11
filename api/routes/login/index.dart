@@ -24,24 +24,24 @@ Future<Response> _get(RequestContext context) async {
   final response = await context.request.body();
   if (response.isEmpty) {
     return Response.json(
-      body: {'message': 'Invalid data'},
+      body: {'code': 400, 'message': 'Invalid data'},
     );
   }
   final data = jsonDecode(response) as Map<String, dynamic>;
-  if (data['email'] == null ||
-      data['password_hash'] == null) {
+  if (data['email'] == null || data['password_hash'] == null) {
     return Response.json(
-      body: {'message': 'Invalid data'},
+      body: {'code': 400, 'message': 'Invalid data'},
     );
   }
   try {
     final rows = DatabaseHelper().queryData(
-      data['email'] as String ,
-      data['password_hash'] as String ,
+      data['email'] as String,
+      data['password_hash'] as String,
     );
-    return Response.json(body: {'message':rows[0]});
+    return Response.json(body: {'code': 0, 'message': rows[0]});
   } catch (e) {
     print(e);
-    return Response.json(body: {'message': 'login failed'});
+    return Response.json(
+        body: {'code': 1, 'message': 'Account or password error'});
   }
 }
