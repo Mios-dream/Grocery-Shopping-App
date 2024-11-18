@@ -4,11 +4,19 @@ import 'package:go_router/go_router.dart';
 import 'package:model/model.dart';
 
 import '../blocs/cart/cart_bloc.dart';
+import '../blocs/payment_order/payment_order_bloc.dart';
 import '../widget/grocery_cart_list.dart';
 import '../widget/grocery_loading_indicator.dart';
 
-class CartScreen extends StatelessWidget {
+
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +24,7 @@ class CartScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     Cart? cart = context.watch<CartBloc>().state.cart;
+    List<CartItem>? cartItems = context.watch<CartBloc>().state.cart?.cartItems;
 
     int totalQuantity = cart?.totalQuantity ?? 0;
 
@@ -148,6 +157,8 @@ class _CartBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Cart? cart = context.watch<CartBloc>().state.cart;
+    String orderId = "";
     return BottomAppBar(
       height: 104,
       child: Column(
@@ -186,7 +197,177 @@ class _CartBottomNavBar extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (cart == null) {
+                      return;
+                    }
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return BlocBuilder<PaymentOrderBloc,
+                              PaymentOrderState>(builder: (context, state) {
+                            if (state is PaymentOrderInitial) {
+                              BlocProvider.of<PaymentOrderBloc>(context)
+                                  .add(CreatePaymentOrderEvent(cart: cart));
+                              return AlertDialog(
+                                title: const Text('Checkout'),
+                                content: Container(
+                                  width: 50,
+                                  height: 50,
+                                  child: const CircularProgressIndicator(),
+                                ),
+                              );
+                            } else if (state is PaymentOrderError) {
+                              return AlertDialog(
+                                title: const Text('Checkout'),
+                                content: Container(
+                                  child: const Text('Something went wrong'),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => context.pop(),
+                                    child: const Text('Cancel'),
+                                  ),
+                                ],
+                              );
+                            } else if (state is PaymentOrderLoading) {
+                              return AlertDialog(
+                                title: const Text('Checkout'),
+                                content: Container(
+                                  width: 50,
+                                  height: 50,
+                                  child: const CircularProgressIndicator(),
+                                ),
+                              );
+                            } else {
+                              if (state is PaymentOrderLoaded) {
+                                orderId = state.orderId;
+                              }
+                              return AlertDialog(
+                                title: const Text('Checkout'),
+                                content: Container(
+                                  child: const Text(
+                                      'Activating payment program, Please pay for the order.'),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      BlocProvider.of<PaymentOrderBloc>(context)
+                                          .add(CartClearEvent());
+                                      context.pop();
+                                    },
+                                    child: const Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return BlocBuilder<PaymentOrderBloc,
+                                                PaymentOrderState>(
+                                              builder: (context, state) {
+                                                if (state
+                                                    is QueryPaymentOrderLoaded) {
+                                                  return AlertDialog(
+                                                      title: const Text(
+                                                          'Checkout'),
+                                                      content: Container(
+                                                        child: const Text(
+                                                            'Payment completed, please check the order status'),
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            BlocProvider.of<
+                                                                        PaymentOrderBloc>(
+                                                                    context)
+                                                                .add(
+                                                                    CartClearEvent());
+                                                            context
+                                                                .read<
+                                                                    CartBloc>()
+                                                                .state
+                                                                .cart
+                                                                ?.cartItems
+                                                                .clear();
+
+
+                                                            Navigator.of(
+                                                                    context)
+                                                                .popUntil((route) =>
+                                                                    route
+                                                                        .settings
+                                                                        .name ==
+                                                                    'cart');
+                                                          },
+                                                          child: Text("退出"),
+                                                        )
+                                                      ]);
+                                                } else if (state
+                                                    is QueryPaymentOrderLoading) {
+                                                  return AlertDialog(
+                                                    title:
+                                                        const Text('Checkout'),
+                                                    content: Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child:
+                                                          const CircularProgressIndicator(),
+                                                    ),
+                                                  );
+                                                } else if (state
+                                                    is QueryPaymentOrderError) {
+                                                  return AlertDialog(
+                                                      title: const Text(
+                                                          'Checkout'),
+                                                      content: Container(
+                                                          child: const Text(
+                                                              'Something went wrong')),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            BlocProvider.of<
+                                                                        PaymentOrderBloc>(
+                                                                    context)
+                                                                .add(
+                                                                    CartClearEvent());
+                                                            context.pop();
+                                                          },
+                                                          child: Text("退出"),
+                                                        )
+                                                      ]);
+                                                } else {
+                                                  BlocProvider.of<
+                                                              PaymentOrderBloc>(
+                                                          context)
+                                                      .add(
+                                                          QueryPaymentOrderEvent(
+                                                              orderId:
+                                                                  orderId));
+                                                  return AlertDialog(
+                                                    title:
+                                                        const Text('Checkout'),
+                                                    content: Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child:
+                                                          const CircularProgressIndicator(),
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            );
+                                          });
+                                    },
+                                    child: const Text('Payment completed'),
+                                  ),
+                                ],
+                              );
+                            }
+                          });
+                        });
+                  },
                   child: const Text('Checkout'),
                 ),
               ),

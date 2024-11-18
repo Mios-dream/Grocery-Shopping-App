@@ -20,6 +20,7 @@ class User {
         "username": username??"",
         "phone_number": phoneNumber??""
       });
+
 }
 
 enum LoginStatus {
@@ -32,6 +33,9 @@ enum LoginStatus {
 // 用户服务
 class UserService {
   static const _baseUrl = Config.baseUrl;
+  static bool isLogin = false;
+
+  static User user=User(email: "", password: "",username: "",);
 
   //  注册用户
   static Future<LoginStatus> registerUser(User user) async {
@@ -57,6 +61,11 @@ class UserService {
       final response = await http.post(uri, body: user.toJson());
       final data = jsonDecode(response.body);
       if (data['code'] == 0) {
+        isLogin=true;
+        UserService.user.username=data['message']['username'];
+        UserService.user.email=data['message']['email'];
+        UserService.user.phoneNumber=data['message']['phone_number'];
+        UserService.user.password=data['message']['password_hash'];
         return LoginStatus.success;
       } else {
         return LoginStatus.fail;

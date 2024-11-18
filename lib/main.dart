@@ -5,6 +5,7 @@ import 'package:oktoast/oktoast.dart';
 import 'blocs/cart/cart_bloc.dart';
 import 'blocs/home/home_bloc.dart';
 import 'blocs/order/order_bloc.dart';
+import 'blocs/payment_order/payment_order_bloc.dart';
 import 'router/app_router.dart';
 import 'repo/category_repo.dart';
 import 'repo/product_repo.dart';
@@ -15,7 +16,6 @@ import 'config.dart';
 void main() {
   const String baseUrl = Config.baseUrl; // API url for the local server
   final ApiClient apiClient = ApiClient(baseUrl: baseUrl);
-
   final CategoryRepo categoryRepo = CategoryRepo(apiClient: apiClient);
   final ProductRepo productRepo = ProductRepo(apiClient: apiClient);
   final CartRepo cartRepo = CartRepo(apiClient: apiClient);
@@ -65,6 +65,10 @@ class GrocifyApp extends StatelessWidget {
             BlocProvider<OrderBloc>(
               create: (_) =>
                   OrderBloc(orderRepo: orderRepo)..add(const OrderLoadEvent()),
+            ),
+            BlocProvider<PaymentOrderBloc>(
+              create: (_) =>
+              PaymentOrderBloc(orderRepo: orderRepo),
             ),
           ],
           child: OKToast(

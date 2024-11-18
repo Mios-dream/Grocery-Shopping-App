@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:model/model.dart';
 
 class ApiClient {
   ApiClient({
@@ -80,6 +81,34 @@ class ApiClient {
     return _handleRequest(
       (headers) => _httpClient.get(uri, headers: headers),
     );
+  }
+
+  Future<dynamic> queryPaymentOrder(String orderId) async {
+    final uri = Uri.parse('$_baseUrl/payment/query-order');
+    return _handleRequest(
+      (headers) => _httpClient.post(
+        uri,
+        headers: headers,
+        body: json.encode({
+          "order_id": orderId,
+        }),
+      ),
+    );
+  }
+
+  Future<dynamic> createPaymentOrder(Cart cart) async {
+    final uri = Uri.parse('$_baseUrl/payment/create-order');
+    print(json.encode({
+      "user_id": cart.userId,
+      "amount": cart.totalPrice,
+      "items": cart.cartItems.map((e) => e.product.name).toList(),
+    }));
+    return _handleRequest(
+        (headers) => _httpClient.post(uri, headers: headers, body: json.encode({
+              "user_id": cart.userId,
+              "amount": cart.totalPrice,
+              "items": cart.cartItems.map((e) => e.product.name).toList(),
+            })));
   }
 
   Future<dynamic> _handleRequest(

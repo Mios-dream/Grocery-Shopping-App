@@ -39,4 +39,15 @@ class CartRepo {
       throw Exception('Failed to remove item to cart');
     }
   }
+
+  Future<void> clearCart(String userId) async {
+    final response = await apiClient.removeFromCart(userId, "");
+
+    if (response is String) {
+      return;
+    } else {
+      throw Exception('Failed to remove item to cart');
+    }
+  }
+
 }

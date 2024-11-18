@@ -28,23 +28,22 @@ Future<Response> _get(RequestContext context) async {
     );
   }
   final data = jsonDecode(response) as Map<String, dynamic>;
-  if (data['username'] == null ||
-      data['email'] == null ||
-      data['password_hash'] == null) {
+  if (data['user_id'] == null || data['items'] == null) {
     return Response.json(
       body: {'code': 400, 'message': 'Invalid data'},
     );
   }
   try {
-    UsersDatabase().insertData(
-      data['username'] as String,
-      data['email'] as String,
-      data['password_hash'] as String,
-      phoneNumber: data['phone_number'] as String?,
+    final orderId = OrderDatabase().createOrder(
+      userId: data['user_id'] as String,
+      amount: data['amount'] as double,
+      items: jsonEncode(data['items']),
     );
-    return Response.json(body: {'code': 0, 'message': 'ok'});
+    return Response.json(
+      body: {'code': 0, 'message': 'success', 'order_id': orderId},
+    );
   } catch (e) {
     print(e);
-    return Response.json(body: {'code': 1, 'message': 'User already exists'});
+    return Response.json(body: {'code': 1, 'message': 'error'});
   }
 }

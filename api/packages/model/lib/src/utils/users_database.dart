@@ -1,12 +1,12 @@
 import 'package:sqlite3/sqlite3.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
-  factory DatabaseHelper() => _instance;
+class UsersDatabase {
+  static final UsersDatabase _instance = UsersDatabase._internal();
+  factory UsersDatabase() => _instance;
 
   static Database? _database;
 
-  DatabaseHelper._internal();
+  UsersDatabase._internal();
 
   Database get database {
     if (_database != null) return _database!;
@@ -15,7 +15,7 @@ class DatabaseHelper {
   }
 
   Database _initDatabase() {
-    const path = './database/user_database.db';
+    const path = './database/app_database.db';
     Database db = sqlite3.open(path);
     db.execute('''
     CREATE TABLE IF NOT EXISTS user (
@@ -31,7 +31,7 @@ class DatabaseHelper {
 
   void insertData(String userName, String email, String passwordHash,
       {String? phoneNumber}) {
-    final dbHelper = DatabaseHelper();
+    final dbHelper = UsersDatabase();
     final db = dbHelper.database;
     phoneNumber ??= '';
     db.execute('''
@@ -40,7 +40,7 @@ class DatabaseHelper {
   }
 
   List<Map<String, dynamic>> queryData(String email,String passwordHash) {
-    final dbHelper = DatabaseHelper();
+    final dbHelper = UsersDatabase();
     final db = dbHelper.database;
     final rows = db.select('''
       SELECT * FROM user
@@ -52,7 +52,7 @@ class DatabaseHelper {
 
   void updateUser(String userName, String email, String passwordHash,
       {String phoneNumber = ''}) async {
-    final dbHelper = DatabaseHelper();
+    final dbHelper = UsersDatabase();
     final db = dbHelper.database;
 
     db.execute('''
@@ -61,7 +61,7 @@ class DatabaseHelper {
   }
 
   void deleteUser(int userId) async {
-    final dbHelper = DatabaseHelper();
+    final dbHelper = UsersDatabase();
     final db = dbHelper.database;
     db.execute('''
     DELETE FROM user WHERE id = ?
@@ -69,7 +69,7 @@ class DatabaseHelper {
   }
 
   void closeDatabase() {
-    final dbHelper = DatabaseHelper();
+    final dbHelper = UsersDatabase();
     final db = dbHelper.database;
     db.dispose();
   }

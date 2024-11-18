@@ -34,7 +34,7 @@ Future<Response> _get(RequestContext context) async {
     );
   }
   try {
-    final rows = DatabaseHelper().queryData(
+    final rows = UsersDatabase().queryData(
       data['email'] as String,
       data['password_hash'] as String,
     );

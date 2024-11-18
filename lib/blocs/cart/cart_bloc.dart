@@ -16,6 +16,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<LoadCart>(_onLoadCart);
     on<AddToCart>(_onAddToCart);
     on<RemoveFromCart>(_onRemoveFromCart);
+    on<ClearCart>(_onClearCart);
   }
 
   Future<void> _onLoadCart(LoadCart event, Emitter<CartState> emit) async {
@@ -62,6 +63,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         event.cartItem.id,
       );
 
+      emit(state.copyWith(status: CartStatus.loaded));
+      add(LoadCart(event.userId));
+    } catch (_) {
+      emit(state.copyWith(status: CartStatus.error));
+    }
+  }
+
+  Future<void> _onClearCart(ClearCart event,
+      Emitter<CartState> emit)async {
+    emit(state.copyWith(status: CartStatus.loading));
+    try {
+      await _cartRepository.clearCart(event.userId);
       emit(state.copyWith(status: CartStatus.loaded));
       add(LoadCart(event.userId));
     } catch (_) {
