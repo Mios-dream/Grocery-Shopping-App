@@ -40,8 +40,7 @@ Future<Response> _get(RequestContext context) async {
     );
     return Response.json(body: {'code': 0, 'message': rows[0]});
   } catch (e) {
-    print(e);
     return Response.json(
-        body: {'code': 1, 'message': 'Account or password error'},);
+      body: {'code': 1, 'message': 'Account or password error'},);
   }
 }

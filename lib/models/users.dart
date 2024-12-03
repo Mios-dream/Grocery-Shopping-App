@@ -49,7 +49,6 @@ class UserService {
         return LoginStatus.exist;
       }
     } catch (e) {
-      print(e);
       return LoginStatus.error;
     }
   }
@@ -71,7 +70,6 @@ class UserService {
         return LoginStatus.fail;
       }
     } catch (e) {
-      print(e);
       return LoginStatus.error;
     }
   }

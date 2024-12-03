@@ -43,7 +43,6 @@ Future<Response> _get(RequestContext context) async {
       body: {'code': 0, 'message': 'success', 'order_id': orderId},
     );
   } catch (e) {
-    print(e);
     return Response.json(body: {'code': 1, 'message': 'error'});
   }
 }

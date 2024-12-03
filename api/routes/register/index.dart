@@ -44,7 +44,6 @@ Future<Response> _get(RequestContext context) async {
     );
     return Response.json(body: {'code': 0, 'message': 'ok'});
   } catch (e) {
-    print(e);
     return Response.json(body: {'code': 1, 'message': 'User already exists'});
   }
 }
