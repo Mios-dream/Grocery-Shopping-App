@@ -50,7 +50,6 @@ class _LoginCardState extends State<LoginCard> {
     emailController = TextEditingController();
     passwordController = TextEditingController();
     phoneNumberController = TextEditingController();
-
   }
 
   // 登录文本框组件，用于快速构建文本框
