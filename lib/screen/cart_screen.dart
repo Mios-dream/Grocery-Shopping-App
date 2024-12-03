@@ -212,7 +212,7 @@ class _CartBottomNavBar extends StatelessWidget {
                                   .add(CreatePaymentOrderEvent(cart: cart));
                               return AlertDialog(
                                 title: const Text('Checkout'),
-                                content: Container(
+                                content: SizedBox(
                                   width: 50,
                                   height: 50,
                                   child: const CircularProgressIndicator(),
@@ -234,7 +234,7 @@ class _CartBottomNavBar extends StatelessWidget {
                             } else if (state is PaymentOrderLoading) {
                               return AlertDialog(
                                 title: const Text('Checkout'),
-                                content: Container(
+                                content: SizedBox(
                                   width: 50,
                                   height: 50,
                                   child: const CircularProgressIndicator(),
@@ -301,7 +301,7 @@ class _CartBottomNavBar extends StatelessWidget {
                                                                         .name ==
                                                                     'cart');
                                                           },
-                                                          child: Text("退出"),
+                                                          child: const Text("退出"),
                                                         )
                                                       ]);
                                                 } else if (state
@@ -309,7 +309,7 @@ class _CartBottomNavBar extends StatelessWidget {
                                                   return AlertDialog(
                                                     title:
                                                         const Text('Checkout'),
-                                                    content: Container(
+                                                    content: SizedBox(
                                                       width: 50,
                                                       height: 50,
                                                       child:
@@ -334,7 +334,7 @@ class _CartBottomNavBar extends StatelessWidget {
                                                                     CartClearEvent());
                                                             context.pop();
                                                           },
-                                                          child: Text("退出"),
+                                                          child: const Text("退出"),
                                                         )
                                                       ]);
                                                 } else {
@@ -348,7 +348,7 @@ class _CartBottomNavBar extends StatelessWidget {
                                                   return AlertDialog(
                                                     title:
                                                         const Text('Checkout'),
-                                                    content: Container(
+                                                    content: SizedBox(
                                                       width: 50,
                                                       height: 50,
                                                       child:
