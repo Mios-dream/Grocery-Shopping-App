@@ -2,25 +2,24 @@ import 'dart:convert';
 import 'package:grocify/config.dart';
 import 'package:http/http.dart' as http;
 
-// 用户信息
 class User {
   String email;
   String password;
   String? username;
   String? phoneNumber;
 
-  User(
-      {required this.email,
-      required this.password,
-      this.username,
-      this.phoneNumber});
+  User({
+    required this.email,
+    required this.password,
+    this.username,
+    this.phoneNumber
+  });
   String toJson() => jsonEncode({
-        "email": email,
-        "password_hash": password,
-        "username": username??"",
-        "phone_number": phoneNumber??""
-      });
-
+    "email": email,
+    "password_hash": password,
+    "username": username??"",
+    "phone_number": phoneNumber??""
+  });
 }
 
 enum LoginStatus {
@@ -30,14 +29,12 @@ enum LoginStatus {
   exist,
 }
 
-// 用户服务
 class UserService {
   static const _baseUrl = Config.baseUrl;
   static bool isLogin = false;
 
   static User user=User(email: "", password: "",username: "",);
 
-  //  注册用户
   static Future<LoginStatus> registerUser(User user) async {
     final uri = Uri.parse('$_baseUrl/register');
     try {
@@ -53,7 +50,6 @@ class UserService {
     }
   }
 
-  //  用户登录
   static Future<LoginStatus> checkLogin(User user) async {
     final uri = Uri.parse('$_baseUrl/login');
     try {
