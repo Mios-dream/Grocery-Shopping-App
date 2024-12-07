@@ -75,4 +75,9 @@ class UserService {
       return LoginStatus.error;
     }
   }
+
+  static Future<void> logout() async {
+    isLogin=false;
+    user=User(email: "", password: "",username: "",);
+  }
 }

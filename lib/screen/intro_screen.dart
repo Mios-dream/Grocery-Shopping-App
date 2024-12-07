@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-// import 'package:video_player/video_player.dart';
+import 'package:video_player/video_player.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -11,21 +11,19 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  // late VideoPlayerController _controller;
+  late VideoPlayerController _controller;
   ImageProvider introImage = const AssetImage('assets/images/intro.jpg');
   Timer? timer;
 
   @override
   void initState() {
     super.initState();
-    // _controller = VideoPlayerController.asset('assets/videos/intro.mp4')
-    //   ..initialize().then((_) {
-    //     _controller.play();
-    //     // Use the compute provided setLooping method to loop your video.
-    //     _controller.setLooping(true);
-    //     // Ensure the correct widget is built.
-    //     setState(() {});
-    //   });
+    _controller = VideoPlayerController.asset('assets/videos/intro.mp4')
+      ..initialize().then((_) {
+        _controller.play();
+        _controller.setLooping(true);
+        setState(() {});
+      });
     _navigateToHome();
   }
 
@@ -44,17 +42,7 @@ class _IntroScreenState extends State<IntroScreen> {
       body: Stack(
         children: <Widget>[
           SizedBox.expand(
-            child: FittedBox(
-              fit: BoxFit.cover,
-              child: SizedBox(
-                // width: ,
-                // height: _controller.value.size.height,
-                child: Image(
-                  image: introImage,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            child: VideoPlayer(_controller),
           ),
           Center(
             child: Text(

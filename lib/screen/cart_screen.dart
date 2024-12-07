@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:model/model.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 import '../blocs/cart/cart_bloc.dart';
 import '../blocs/payment_order/payment_order_bloc.dart';
@@ -157,6 +158,7 @@ class _CartBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     Cart? cart = context.watch<CartBloc>().state.cart;
     String orderId = "";
     return BottomAppBar(
@@ -247,8 +249,16 @@ class _CartBottomNavBar extends StatelessWidget {
                               return AlertDialog(
                                 title: const Text('Checkout'),
                                 content: Container(
-                                  child: const Text(
-                                      'Activating payment program, Please pay for the order.'),
+                                  // child: const Text(
+                                  //     'Activating payment program, Please pay for the order.'),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 300,
+                                    height: 200,
+                                    child: PrettyQrView.data(
+                                      data: 'this is a test',
+                                    ),
+                                  ),
                                 ),
                                 actions: [
                                   TextButton(
@@ -301,7 +311,7 @@ class _CartBottomNavBar extends StatelessWidget {
                                                                         .name ==
                                                                     'cart');
                                                           },
-                                                          child: Text("退出"),
+                                                          child: const Text("Quit"),
                                                         )
                                                       ]);
                                                 } else if (state
@@ -327,14 +337,20 @@ class _CartBottomNavBar extends StatelessWidget {
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () {
+
+                                                            BlocProvider.of<
+                                                                CartBloc>(
+                                                                context)
+                                                                .add(ClearCart(userId: cart.userId));
                                                             BlocProvider.of<
                                                                         PaymentOrderBloc>(
                                                                     context)
                                                                 .add(
                                                                     CartClearEvent());
+
                                                             context.pop();
                                                           },
-                                                          child: Text("退出"),
+                                                          child: const Text("Quit"),
                                                         )
                                                       ]);
                                                 } else {

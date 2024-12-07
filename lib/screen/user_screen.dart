@@ -91,6 +91,10 @@ class _UserScreenState extends State<UserScreen> {
                       ),
                       ListTile(
                         leading: const Icon(Icons.logout),
+                        onTap: () {
+                            UserService.logout();
+                            context.go('/');
+                        },
                         title: Text('Logout', style: textTheme.titleMedium),
                       ),
                     ],

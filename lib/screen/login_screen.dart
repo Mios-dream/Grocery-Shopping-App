@@ -125,7 +125,7 @@ class _LoginCardState extends State<LoginCard> {
                   children: [
                     TextButton(
                         onPressed: () {
-                          SystemNavigator.pop();
+                          context.pop();
                         },
                         child: const Text("取消")),
                     TextButton(
