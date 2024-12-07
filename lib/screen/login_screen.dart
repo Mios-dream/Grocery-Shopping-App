@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:oktoast/oktoast.dart';
-import '../models/users.dart';
+import '../model/user.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

@@ -20,13 +20,11 @@ class OrderRepo {
 
   Future<String> createPaymentOrder(Cart cart) async {
     final response = await apiClient.createPaymentOrder(cart);
-    print("请求返回数据$response");
     return response['order_id'];
   }
 
   Future<bool> queryPaymentOrder(String orderId) async {
     final response = await apiClient.queryPaymentOrder(orderId);
-    print("请求返回数据$response");
     if (response['code'] == 0) {
       return true;
     } else {

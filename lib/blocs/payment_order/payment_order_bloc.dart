@@ -42,7 +42,6 @@ class PaymentOrderBloc extends Bloc<PaymentOrderEvent, PaymentOrderState> {
       emit(QueryPaymentOrderLoaded(paymentState));
     } catch (e) {
       emit(QueryPaymentOrderError(e.toString()));
-      print(e);
     }
   }
 }

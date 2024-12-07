@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../models/users.dart';
+import '../model/user.dart';
 import '../widget/app_bottom_nav_bar.dart';
 
 class UserScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    print(UserService.user.toJson());
+    // print(UserService.user.toJson());
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(

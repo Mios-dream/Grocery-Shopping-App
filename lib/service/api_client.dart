@@ -98,11 +98,11 @@ class ApiClient {
 
   Future<dynamic> createPaymentOrder(Cart cart) async {
     final uri = Uri.parse('$_baseUrl/payment/create-order');
-    print(json.encode({
-      "user_id": cart.userId,
-      "amount": cart.totalPrice,
-      "items": cart.cartItems.map((e) => e.product.name).toList(),
-    }));
+    // print(json.encode({
+    //   "user_id": cart.userId,
+    //   "amount": cart.totalPrice,
+    //   "items": cart.cartItems.map((e) => e.product.name).toList(),
+    // }));
     return _handleRequest(
         (headers) => _httpClient.post(uri, headers: headers, body: json.encode({
               "user_id": cart.userId,

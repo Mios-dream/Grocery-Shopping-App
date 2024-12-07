@@ -212,12 +212,12 @@ class _CartBottomNavBar extends StatelessWidget {
                             if (state is PaymentOrderInitial) {
                               BlocProvider.of<PaymentOrderBloc>(context)
                                   .add(CreatePaymentOrderEvent(cart: cart));
-                              return AlertDialog(
-                                title: const Text('Checkout'),
-                                content: Container(
+                              return const AlertDialog(
+                                title: Text('Checkout'),
+                                content: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: const CircularProgressIndicator(),
+                                  child: CircularProgressIndicator(),
                                 ),
                               );
                             } else if (state is PaymentOrderError) {
@@ -234,12 +234,12 @@ class _CartBottomNavBar extends StatelessWidget {
                                 ],
                               );
                             } else if (state is PaymentOrderLoading) {
-                              return AlertDialog(
-                                title: const Text('Checkout'),
-                                content: Container(
+                              return const AlertDialog(
+                                title: Text('Checkout'),
+                                content: SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: const CircularProgressIndicator(),
+                                  child: CircularProgressIndicator(),
                                 ),
                               );
                             } else {
@@ -316,14 +316,14 @@ class _CartBottomNavBar extends StatelessWidget {
                                                       ]);
                                                 } else if (state
                                                     is QueryPaymentOrderLoading) {
-                                                  return AlertDialog(
+                                                  return const AlertDialog(
                                                     title:
-                                                        const Text('Checkout'),
-                                                    content: Container(
+                                                        Text('Checkout'),
+                                                    content: SizedBox(
                                                       width: 50,
                                                       height: 50,
                                                       child:
-                                                          const CircularProgressIndicator(),
+                                                          CircularProgressIndicator(),
                                                     ),
                                                   );
                                                 } else if (state
@@ -361,14 +361,14 @@ class _CartBottomNavBar extends StatelessWidget {
                                                           QueryPaymentOrderEvent(
                                                               orderId:
                                                                   orderId));
-                                                  return AlertDialog(
+                                                  return const AlertDialog(
                                                     title:
-                                                        const Text('Checkout'),
-                                                    content: Container(
+                                                        Text('Checkout'),
+                                                    content: SizedBox(
                                                       width: 50,
                                                       height: 50,
                                                       child:
-                                                          const CircularProgressIndicator(),
+                                                          CircularProgressIndicator(),
                                                     ),
                                                   );
                                                 }
