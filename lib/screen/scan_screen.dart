@@ -9,7 +9,9 @@ class ScanScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final textTheme = Theme.of(context).textTheme;
+    // ignore: unused_local_variable
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(

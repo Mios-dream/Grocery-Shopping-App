@@ -16,6 +16,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    // ignore: unused_local_variable
     final colorScheme = Theme.of(context).colorScheme;
     // print(UserService.user.toJson());
     return Scaffold(
