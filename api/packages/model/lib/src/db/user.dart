@@ -29,13 +29,13 @@ class UserDB {
     return db;
   }
 
-  void insertData(String userName, String email, String passwordHash,
+  void insertData(String email, String userName, String passwordHash,
       {String? phoneNumber}) {
     final dbHelper = UserDB();
     final db = dbHelper.database;
     phoneNumber ??= '';
     db.execute('''
-      INSERT INTO user (username, email, password_hash, phone_number) VALUES (?, ?, ?, ?)
+      INSERT INTO user (email, username, password_hash, phone_number) VALUES (?, ?, ?, ?)
       ''', [userName, email, passwordHash, phoneNumber]);
   }
 
@@ -50,22 +50,22 @@ class UserDB {
     return rows;
   }
 
-  void updateUser(String userName, String email, String passwordHash,
+  void updateUser(String email, String userName, String passwordHash,
       {String phoneNumber = ''}) async {
     final dbHelper = UserDB();
     final db = dbHelper.database;
 
     db.execute('''
-    UPDATE user SET username = ?, email = ?, password_hash = ?, phone_number = ?
-    ''', [userName, email, passwordHash, phoneNumber]);
+    UPDATE user SET email = ?, username = ?, password_hash = ?, phone_number = ?
+    ''', [email, userName, passwordHash, phoneNumber]);
   }
 
-  void deleteUser(int userId) async {
+  void deleteUser(int userID) async {
     final dbHelper = UserDB();
     final db = dbHelper.database;
     db.execute('''
     DELETE FROM user WHERE id = ?
-    ''', [userId]);
+    ''', [userID]);
   }
 
   void closeDatabase() {

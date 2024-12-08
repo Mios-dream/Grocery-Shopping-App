@@ -35,8 +35,8 @@ class LoginCard extends StatefulWidget {
 }
 
 class _LoginCardState extends State<LoginCard> {
-  late TextEditingController usernameController;
   late TextEditingController emailController;
+  late TextEditingController usernameController;
   late TextEditingController passwordController;
   late TextEditingController phoneNumberController;
   late User user;
