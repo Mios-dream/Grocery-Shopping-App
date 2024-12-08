@@ -21,13 +21,13 @@ FutureOr<Response> onRequest(RequestContext context) async {
 }
 
 Future<Response> _get(RequestContext context) async {
-  final response = await context.request.body();
-  if (response.isEmpty) {
+  final req = await context.request.body();
+  if (req.isEmpty) {
     return Response.json(
       body: {'code': 400, 'message': 'Invalid data'},
     );
   }
-  final data = jsonDecode(response) as Map<String, dynamic>;
+  final data = jsonDecode(req) as Map<String, dynamic>;
   if (data['email'] == null || data['password_hash'] == null) {
     return Response.json(
       body: {'code': 400, 'message': 'Invalid data'},
