@@ -51,7 +51,6 @@ class _LoginCardState extends State<LoginCard> {
     phoneNumberController = TextEditingController();
   }
 
-  // 登录文本框组件，用于快速构建文本框
   Widget loginTextField(
       {required IconData icon,
       required String hintText,
@@ -98,7 +97,7 @@ class _LoginCardState extends State<LoginCard> {
         child: Column(
           children: [
             const Text(
-              "登录",
+              "Login",
               style: TextStyle(
                 fontSize: 30,
               ),
@@ -107,13 +106,13 @@ class _LoginCardState extends State<LoginCard> {
                 flex: 1,
                 child: loginTextField(
                     icon: Icons.email_rounded,
-                    hintText: "邮箱",
+                    hintText: "Email",
                     controller: emailController)),
             Expanded(
               flex: 1,
               child: loginTextField(
                   icon: Icons.password,
-                  hintText: "密码",
+                  hintText: "Password",
                   controller: passwordController),
             ),
             Expanded(
@@ -125,14 +124,14 @@ class _LoginCardState extends State<LoginCard> {
                         onPressed: () {
                           context.pop();
                         },
-                        child: const Text("取消")),
+                        child: const Text("Cancel")),
                     TextButton(
                         onPressed: () async {
                           setState(() {
                             isLogin = false;
                           });
                         },
-                        child: const Text("注册")),
+                        child: const Text("Register")),
                     TextButton(
                         onPressed: () async {
                           if (!checkLogin()) {
@@ -148,13 +147,13 @@ class _LoginCardState extends State<LoginCard> {
                             if (context.mounted) {
                               context.goNamed("home");
                             } else {
-                              showToast("未知错误");
+                              showToast("Unknown error");
                             }
                           } else if (status == LoginStatus.fail) {
-                            showToast("用户名或密码错误");
+                            showToast("Username or password is incorrect");
                           }
                         },
-                        child: const Text("登录"))
+                        child: const Text("Login"))
                   ],
                 ))
           ],
@@ -172,7 +171,7 @@ class _LoginCardState extends State<LoginCard> {
         child: Column(
           children: [
             const Text(
-              "注册",
+              "Register",
               style: TextStyle(
                 fontSize: 30,
               ),
@@ -180,27 +179,27 @@ class _LoginCardState extends State<LoginCard> {
             Expanded(
                 flex: 1,
                 child: loginTextField(
-                    icon: Icons.person,
-                    hintText: "用户名",
-                    controller: usernameController)),
+                    icon: Icons.email_rounded,
+                    hintText: "Email",
+                    controller: emailController)),
             Expanded(
                 flex: 1,
                 child: loginTextField(
-                    icon: Icons.email_rounded,
-                    hintText: "邮箱",
-                    controller: emailController)),
+                    icon: Icons.person,
+                    hintText: "Username",
+                    controller: usernameController)),
             Expanded(
               flex: 1,
               child: loginTextField(
                   icon: Icons.password,
-                  hintText: "密码",
+                  hintText: "Password",
                   controller: passwordController),
             ),
             Expanded(
               flex: 1,
               child: loginTextField(
                   icon: Icons.phone,
-                  hintText: "手机号",
+                  hintText: "Phone Number",
                   controller: phoneNumberController),
             ),
             Expanded(
@@ -214,7 +213,7 @@ class _LoginCardState extends State<LoginCard> {
                             isLogin = true;
                           });
                         },
-                        child: const Text("取消")),
+                        child: const Text("Cancel")),
                     TextButton(
                         onPressed: () async {
                           if (!checkLogin()) {
@@ -229,12 +228,12 @@ class _LoginCardState extends State<LoginCard> {
                           LoginStatus status =
                               await UserService.registerUser(user);
                           if (status == LoginStatus.success) {
-                            showToast("注册成功");
+                            showToast("Register success");
                           } else if (status == LoginStatus.exist) {
-                            showToast("用户名或邮箱已存在");
+                            showToast("User already exist");
                           }
                         },
-                        child: const Text("注册")),
+                        child: const Text("Register")),
                   ],
                 ))
           ],
