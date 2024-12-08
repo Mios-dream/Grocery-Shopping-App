@@ -15,8 +15,8 @@ class User {
       this.phoneNumber});
   String toJson() => jsonEncode({
         "email": email,
-        "password_hash": password,
         "username": username ?? "",
+        "password_hash": password,
         "phone_number": phoneNumber ?? ""
       });
 }
