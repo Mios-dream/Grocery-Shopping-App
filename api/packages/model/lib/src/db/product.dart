@@ -38,19 +38,18 @@ class ProductDatabase {
   }
 
   void insertData(
-      {
-        required String name,
-        required String description,
-        required double price,
-        required double discountedPrice,
-        required String imageUrl,
-        required String categoryId,
-        required String aisleId,
-        required int stock,
-        required String unit,
-        required String reviews,
-        required bool isPopular,
-        required bool isTrending}) {
+      {required String name,
+      required String description,
+      required double price,
+      required double discountedPrice,
+      required String imageUrl,
+      required String categoryId,
+      required String aisleId,
+      required int stock,
+      required String unit,
+      required String reviews,
+      required bool isPopular,
+      required bool isTrending}) {
     final dbHelper = ProductDatabase();
     final db = dbHelper.database;
     db.execute('''
@@ -83,17 +82,17 @@ class ProductDatabase {
 
   void updateProduct(
       {required String name,
-        required String description,
-        required double price,
-        required double discountedPrice,
-        required String imageUrl,
-        required String categoryId,
-        required String aisleId,
-        required int stock,
-        required String unit,
-        required String reviews,
-        required bool isPopular,
-        required bool isTrending}) async {
+      required String description,
+      required double price,
+      required double discountedPrice,
+      required String imageUrl,
+      required String categoryId,
+      required String aisleId,
+      required int stock,
+      required String unit,
+      required String reviews,
+      required bool isPopular,
+      required bool isTrending}) async {
     final dbHelper = ProductDatabase();
     final db = dbHelper.database;
     db.execute('''

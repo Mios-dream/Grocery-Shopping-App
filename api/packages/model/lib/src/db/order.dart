@@ -32,9 +32,7 @@ class OrderDatabase {
   }
 
   String createOrder(
-      {required String userId,
-      required double amount,
-      required String items}) {
+      {required String userId, required double amount, required String items}) {
     final dbHelper = OrderDatabase();
     final db = dbHelper.database;
     String orderId = const Uuid().v4();
@@ -64,7 +62,7 @@ class OrderDatabase {
     return rows;
   }
 
-  bool checkPaymentSuccessful(){
+  bool checkPaymentSuccessful() {
     return true;
   }
 

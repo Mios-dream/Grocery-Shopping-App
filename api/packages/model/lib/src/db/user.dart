@@ -1,12 +1,12 @@
 import 'package:sqlite3/sqlite3.dart';
 
-class UsersDatabase {
-  static final UsersDatabase _instance = UsersDatabase._internal();
-  factory UsersDatabase() => _instance;
+class UserDB {
+  static final UserDB _instance = UserDB._internal();
+  factory UserDB() => _instance;
 
   static Database? _database;
 
-  UsersDatabase._internal();
+  UserDB._internal();
 
   Database get database {
     if (_database != null) return _database!;
@@ -31,7 +31,7 @@ class UsersDatabase {
 
   void insertData(String userName, String email, String passwordHash,
       {String? phoneNumber}) {
-    final dbHelper = UsersDatabase();
+    final dbHelper = UserDB();
     final db = dbHelper.database;
     phoneNumber ??= '';
     db.execute('''
@@ -39,20 +39,20 @@ class UsersDatabase {
       ''', [userName, email, passwordHash, phoneNumber]);
   }
 
-  List<Map<String, dynamic>> queryData(String email,String passwordHash) {
-    final dbHelper = UsersDatabase();
+  List<Map<String, dynamic>> queryData(String email, String passwordHash) {
+    final dbHelper = UserDB();
     final db = dbHelper.database;
     final rows = db.select('''
       SELECT * FROM user
       WHERE email = ?
       AND password_hash = ?
-    ''',[email,passwordHash]);
+    ''', [email, passwordHash]);
     return rows;
   }
 
   void updateUser(String userName, String email, String passwordHash,
       {String phoneNumber = ''}) async {
-    final dbHelper = UsersDatabase();
+    final dbHelper = UserDB();
     final db = dbHelper.database;
 
     db.execute('''
@@ -61,7 +61,7 @@ class UsersDatabase {
   }
 
   void deleteUser(int userId) async {
-    final dbHelper = UsersDatabase();
+    final dbHelper = UserDB();
     final db = dbHelper.database;
     db.execute('''
     DELETE FROM user WHERE id = ?
@@ -69,7 +69,7 @@ class UsersDatabase {
   }
 
   void closeDatabase() {
-    final dbHelper = UsersDatabase();
+    final dbHelper = UserDB();
     final db = dbHelper.database;
     db.dispose();
   }

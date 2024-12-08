@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
-import 'package:model/utils.dart';
+import 'package:model/db.dart';
 
 FutureOr<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
@@ -34,13 +34,14 @@ Future<Response> _get(RequestContext context) async {
     );
   }
   try {
-    final rows = UsersDatabase().queryData(
+    final rows = UserDB().queryData(
       data['email'] as String,
       data['password_hash'] as String,
     );
     return Response.json(body: {'code': 0, 'message': rows[0]});
   } catch (e) {
     return Response.json(
-      body: {'code': 1, 'message': 'Account or password error'},);
+      body: {'code': 1, 'message': 'Account or password error'},
+    );
   }
 }

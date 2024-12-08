@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
-import 'package:model/utils.dart';
+import 'package:model/db.dart';
 
 FutureOr<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
@@ -28,22 +28,22 @@ Future<Response> _get(RequestContext context) async {
     );
   }
   final data = jsonDecode(response) as Map<String, dynamic>;
-  if (data['username'] == null ||
-      data['email'] == null ||
+  if (data['email'] == null ||
+      data['username'] == null ||
       data['password_hash'] == null) {
     return Response.json(
       body: {'code': 400, 'message': 'Invalid data'},
     );
   }
   try {
-    UsersDatabase().insertData(
-      data['username'] as String,
+    UserDB().insertData(
       data['email'] as String,
+      data['username'] as String,
       data['password_hash'] as String,
       phoneNumber: data['phone_number'] as String?,
     );
     return Response.json(body: {'code': 0, 'message': 'ok'});
   } catch (e) {
-    return Response.json(body: {'code': 1, 'message': 'User already exists'});
+    return Response.json(body: {'code': 1, 'message': 'Register failed'});
   }
 }

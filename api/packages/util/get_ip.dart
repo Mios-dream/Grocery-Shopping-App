@@ -2,8 +2,7 @@ import 'dart:io';
 
 Future<String> getHostIP() async {
   try {
-    final addresses =
-        await InternetAddress.lookup('localhost');
+    final addresses = await InternetAddress.lookup('localhost');
     for (final address in addresses) {
       if (address.type == InternetAddressType.IPv4) {
         return address.address;
