@@ -12,7 +12,6 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -44,7 +43,8 @@ class _UserScreenState extends State<UserScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("${UserService.user.username}", style: textTheme.headlineSmall),
+                                Text("${UserService.user.username}",
+                                    style: textTheme.headlineSmall),
                                 Text(
                                   'User ID: ${UserService.user.email}',
                                   style: TextStyle(
@@ -68,7 +68,7 @@ class _UserScreenState extends State<UserScreen> {
                                 onPressed: () {
                                   context.pushNamed('login');
                                 },
-                                child: const Text("点击登录"))
+                                child: const Text("Login here"))
                           ]),
                         ),
                 )),
@@ -93,8 +93,8 @@ class _UserScreenState extends State<UserScreen> {
                       ListTile(
                         leading: const Icon(Icons.logout),
                         onTap: () {
-                            UserService.logout();
-                            context.go('/');
+                          UserService.logout();
+                          context.go('/');
                         },
                         title: Text('Logout', style: textTheme.titleMedium),
                       ),
