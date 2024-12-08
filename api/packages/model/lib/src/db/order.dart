@@ -16,7 +16,7 @@ class OrderDatabase {
   }
 
   Database _initDatabase() {
-    const path = './database/app_database.db';
+    const path = './db/grocify.db';
     Database db = sqlite3.open(path);
     db.execute('''
     CREATE TABLE IF NOT EXISTS orders (

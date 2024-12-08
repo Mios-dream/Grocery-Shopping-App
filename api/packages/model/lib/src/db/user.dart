@@ -15,13 +15,13 @@ class UserDB {
   }
 
   Database _initDatabase() {
-    const path = './database/app_database.db';
+    const path = './db/grocify.db';
     Database db = sqlite3.open(path);
     db.execute('''
     CREATE TABLE IF NOT EXISTS user (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      username TEXT UNIQUE NOT NULL,
       email TEXT UNIQUE NOT NULL,
+      username TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
       phone_number TEXT
     )

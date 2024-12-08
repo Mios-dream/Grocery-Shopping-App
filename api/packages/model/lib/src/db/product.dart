@@ -15,7 +15,7 @@ class ProductDatabase {
   }
 
   Database _initDatabase() {
-    const path = './api/database/app_database.db';
+    const path = './db/grocify.db';
     Database db = sqlite3.open(path);
     db.execute('''
     CREATE TABLE IF NOT EXISTS product (
