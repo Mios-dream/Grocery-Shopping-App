@@ -71,13 +71,11 @@ class _LoginCardState extends State<LoginCard> {
 
   bool checkLogin() {
     if (emailController.text.isEmpty) {
-      showToast("邮箱不能为空");
+      showToast("Email cannot be empty");
       return false;
     }
     if (passwordController.text.isEmpty) {
-      showToast(
-        "密码不能为空",
-      );
+      showToast("Password cannot be empty");
       return false;
     }
     return true;
