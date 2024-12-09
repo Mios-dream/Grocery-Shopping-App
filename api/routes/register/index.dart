@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
-import 'package:model/db.dart';
+import 'package:db/db.dart';
 
 FutureOr<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
@@ -44,6 +44,7 @@ Future<Response> _get(RequestContext context) async {
     );
     return Response.json(body: {'code': 0, 'message': 'ok'});
   } catch (e) {
+    print(e);
     return Response.json(body: {'code': 1, 'message': 'Register failed'});
   }
 }

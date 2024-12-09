@@ -42,6 +42,7 @@ class UserService {
       if (data['code'] == 0) {
         return LoginStatus.success;
       } else {
+        print("api消息$data");
         return LoginStatus.exist;
       }
     } catch (e) {

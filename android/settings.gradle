@@ -13,6 +13,14 @@ pluginManagement {
   plugins {
     id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
   }
+
+  resolutionStrategy {
+    eachPlugin {
+      if (requested.id.namespace == 'org.jetbrains.kotlin' && requested.id.name == 'android') {
+        useVersion '1.8.10' // 替换为最新版本号
+      }
+    }
+  }
 }
 
 include ":app"

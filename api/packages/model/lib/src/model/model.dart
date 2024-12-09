@@ -4,4 +4,4 @@ export 'cart_item.dart';
 export 'category.dart';
 export 'order.dart';
 export 'product.dart';
-// export 'user.dart';
+// export 'user_service.dart';

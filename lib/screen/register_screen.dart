@@ -1,10 +1,39 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocify/router/app_router.dart';
+import 'package:oktoast/oktoast.dart';
 
-class RegisterScreen extends StatelessWidget {
+import '../service/user_service.dart';
+
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  bool isChecked = false;
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  late User user;
+
+  bool checkLogin() {
+    if (emailController.text.isEmpty) {
+      showToast("Email cannot be empty");
+      return false;
+    }
+    if (passwordController.text.isEmpty) {
+      showToast("Password cannot be empty");
+      return false;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,88 +45,127 @@ class RegisterScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colorScheme.inverseSurface,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Great! Let\'s get some basic info',
-                        style: GoogleFonts.ibmPlexSerif(
-                          fontSize: 42.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 32.0),
-                      const _FirstNameInput().animate().fadeIn(
-                            duration: const Duration(milliseconds: 200),
+      body: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/register_background.jpg'),
+            fit: BoxFit.cover,
+          )),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 50.0),
+                        Text(
+                          'Great! Let\'s get some basic info',
+                          style: GoogleFonts.ibmPlexSerif(
+                            fontSize: 42.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
-                      const SizedBox(height: 16.0),
-                      const _LastNameInput()
-                          .animate(delay: const Duration(milliseconds: 200))
-                          .fadeIn(duration: const Duration(milliseconds: 200)),
-                      const SizedBox(height: 16.0),
-                      const _EmailInput()
-                          .animate(delay: const Duration(milliseconds: 400))
-                          .fadeIn(duration: const Duration(milliseconds: 200)),
-                      const SizedBox(height: 16.0),
-                      _DateOfBirthInput()
-                          .animate(delay: const Duration(milliseconds: 600))
-                          .fadeIn(duration: const Duration(milliseconds: 200)),
-                      const SizedBox(height: 16.0),
-                      const _PhoneNumberInput()
-                          .animate(delay: const Duration(milliseconds: 800))
-                          .fadeIn(duration: const Duration(milliseconds: 200)),
-                      const SizedBox(height: 16.0),
-                      CheckboxListTile(
-                        controlAffinity: ListTileControlAffinity.leading,
-                        value: false,
-                        onChanged: (bool? value) {},
-                        title: Text(
-                          'By joining, I agree to the Terms & Conditions and Privacy Policy',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(color: Colors.white),
                         ),
-                      )
-                          .animate(delay: const Duration(milliseconds: 1000))
-                          .fadeIn(duration: const Duration(milliseconds: 200)),
-                    ],
+                        const SizedBox(height: 100.0),
+                        _UserNameInput(
+                          controller: usernameController,
+                        ).animate().fadeIn(
+                              duration: const Duration(milliseconds: 200),
+                            ),
+                        const SizedBox(height: 16.0),
+                        _EmailInput(
+                          controller: emailController,
+                        )
+                            .animate(delay: const Duration(milliseconds: 200))
+                            .fadeIn(
+                                duration: const Duration(milliseconds: 200)),
+                        const SizedBox(height: 16.0),
+                        _PasswordInput(
+                          controller: passwordController,
+                        )
+                            .animate(delay: const Duration(milliseconds: 400))
+                            .fadeIn(
+                                duration: const Duration(milliseconds: 200)),
+                        const SizedBox(height: 16.0),
+                        _PhoneNumberInput(
+                          controller: phoneNumberController,
+                        )
+                            .animate(delay: const Duration(milliseconds: 600))
+                            .fadeIn(
+                                duration: const Duration(milliseconds: 200)),
+                        const SizedBox(height: 16.0),
+                        CheckboxListTile(
+                          controlAffinity: ListTileControlAffinity.leading,
+                          value: isChecked,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              isChecked = value!;
+                            });
+                          },
+                          title: Text(
+                            'By joining, I agree to the Terms & Conditions and Privacy Policy',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: Colors.white),
+                          ),
+                        )
+                            .animate(delay: const Duration(milliseconds: 1000))
+                            .fadeIn(
+                                duration: const Duration(milliseconds: 200)),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            isKeyboardOpen
-                ? const SizedBox()
-                : Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                      right: 16.0,
-                      top: 16.0,
-                    ),
-                    child: FilledButton(
-                      onPressed: () {},
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 48.0),
+              isKeyboardOpen
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                          left: 16.0, right: 16.0, top: 16.0, bottom: 16),
+                      child: FilledButton(
+                        onPressed: () {
+                          if (isChecked == false) {
+                            showToast(
+                                "Please agree to the terms and conditions");
+                            return;
+                          }
+
+                          if (!checkLogin()) {
+                            return;
+                          }
+                          user = User(
+                            email: emailController.text,
+                            password: passwordController.text,
+                            username: usernameController.text,
+                            phoneNumber: phoneNumberController.text,
+                          );
+                          UserService.registerUser(user).then((status) {
+                            if (status == LoginStatus.success) {
+                              showToast("Register success");
+                              context.goNamed("login");
+                            } else if (status == LoginStatus.exist) {
+                              showToast("User already exist");
+                            }
+                          });
+                        },
+                        style: FilledButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 48.0),
+                        ),
+                        child: const Text("Continue"),
                       ),
-                      child: const Text("Continue"),
                     ),
-                  ),
-          ],
-        ),
-      ),
+            ],
+          )),
     );
   }
 }
 
-class _FirstNameInput extends StatelessWidget {
-  const _FirstNameInput();
+class _UserNameInput extends StatelessWidget {
+  final TextEditingController controller;
+  const _UserNameInput({required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -105,10 +173,11 @@ class _FirstNameInput extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return TextFormField(
+      controller: controller,
       keyboardType: TextInputType.name,
       decoration: InputDecoration(
         filled: true,
-        label: const Text('First Name'),
+        label: const Text('Username'),
         labelStyle: textTheme.bodyLarge!.copyWith(
           color: Colors.white,
         ),
@@ -130,8 +199,11 @@ class _FirstNameInput extends StatelessWidget {
   }
 }
 
-class _LastNameInput extends StatelessWidget {
-  const _LastNameInput();
+class _PasswordInput extends StatelessWidget {
+  final TextEditingController controller;
+  const _PasswordInput({
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -140,9 +212,10 @@ class _LastNameInput extends StatelessWidget {
 
     return TextFormField(
       keyboardType: TextInputType.name,
+      controller: controller,
       decoration: InputDecoration(
         filled: true,
-        label: const Text('Last Name'),
+        label: const Text('Password'),
         labelStyle: textTheme.bodyLarge!.copyWith(
           color: Colors.white,
         ),
@@ -165,7 +238,8 @@ class _LastNameInput extends StatelessWidget {
 }
 
 class _EmailInput extends StatelessWidget {
-  const _EmailInput();
+  final TextEditingController controller;
+  const _EmailInput({required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -174,6 +248,7 @@ class _EmailInput extends StatelessWidget {
 
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
+      controller: controller,
       decoration: InputDecoration(
         filled: true,
         label: const Text('Email'),
@@ -198,239 +273,11 @@ class _EmailInput extends StatelessWidget {
   }
 }
 
-class _DateOfBirthInput extends StatefulWidget {
-  @override
-  _DateOfBirthInputState createState() => _DateOfBirthInputState();
-}
-
-class _DateOfBirthInputState extends State<_DateOfBirthInput> {
-  TextEditingController dateController = TextEditingController();
-  DateTime date = DateTime(2016, 10, 26);
-  DateTime time = DateTime(2016, 5, 10, 22, 35);
-  DateTime dateTime = DateTime(2016, 8, 3, 17, 45);
-
-  _selectDate(BuildContext context) async {
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) => Container(
-        height: 216,
-        padding: const EdgeInsets.only(top: 6.0),
-        margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        color: CupertinoColors.systemBackground.resolveFrom(context),
-        child: SafeArea(
-          top: false,
-          child: CupertinoDatePicker(
-            initialDateTime: date,
-            mode: CupertinoDatePickerMode.date,
-            use24hFormat: true,
-            showDayOfWeek: true,
-            onDateTimeChanged: (DateTime newDate) {
-              setState(() => date = newDate);
-              dateController.text = newDate.toLocal().toString().split(' ')[0];
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return TextFormField(
-      controller: dateController,
-      keyboardType: TextInputType.text,
-      onTap: () {
-        // Hide keyboard when the user taps on the TextFormField
-        FocusScope.of(context).requestFocus(FocusNode());
-        _selectDate(context);
-      },
-      decoration: InputDecoration(
-        filled: true,
-        label: const Text('Date of Birth'),
-        labelStyle: textTheme.bodyLarge!.copyWith(
-          color: Colors.white,
-        ),
-        fillColor: colorScheme.surface.withAlpha(100),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: const BorderSide(color: Colors.white),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: BorderSide(color: Colors.white.withAlpha(100)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: const BorderSide(color: Colors.white),
-        ),
-      ),
-    );
-  }
-}
-
-class DatePickerExample extends StatefulWidget {
-  const DatePickerExample({super.key});
-
-  @override
-  State<DatePickerExample> createState() => _DatePickerExampleState();
-}
-
-class _DatePickerExampleState extends State<DatePickerExample> {
-  DateTime date = DateTime(2016, 10, 26);
-  DateTime time = DateTime(2016, 5, 10, 22, 35);
-  DateTime dateTime = DateTime(2016, 8, 3, 17, 45);
-
-  // This function displays a CupertinoModalPopup with a reasonable fixed height
-  // which hosts CupertinoDatePicker.
-  void _showDialog(Widget child) {}
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('CupertinoDatePicker Sample'),
-      ),
-      child: DefaultTextStyle(
-        style: TextStyle(
-          color: CupertinoColors.label.resolveFrom(context),
-          fontSize: 22.0,
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _DatePickerItem(
-                children: <Widget>[
-                  const Text('Date'),
-                  CupertinoButton(
-                    // Display a CupertinoDatePicker in date picker mode.
-                    onPressed: () => _showDialog(
-                      CupertinoDatePicker(
-                        initialDateTime: date,
-                        mode: CupertinoDatePickerMode.date,
-                        use24hFormat: true,
-                        // This shows day of week alongside day of month
-                        showDayOfWeek: true,
-                        // This is called when the user changes the date.
-                        onDateTimeChanged: (DateTime newDate) {
-                          setState(() => date = newDate);
-                        },
-                      ),
-                    ),
-                    // In this example, the date is formatted manually. You can
-                    // use the intl package to format the value based on the
-                    // user's locale settings.
-                    child: Text(
-                      '${date.month}-${date.day}-${date.year}',
-                      style: const TextStyle(
-                        fontSize: 22.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              _DatePickerItem(
-                children: <Widget>[
-                  const Text('Time'),
-                  CupertinoButton(
-                    // Display a CupertinoDatePicker in time picker mode.
-                    onPressed: () => _showDialog(
-                      CupertinoDatePicker(
-                        initialDateTime: time,
-                        mode: CupertinoDatePickerMode.time,
-                        use24hFormat: true,
-                        // This is called when the user changes the time.
-                        onDateTimeChanged: (DateTime newTime) {
-                          setState(() => time = newTime);
-                        },
-                      ),
-                    ),
-                    // In this example, the time value is formatted manually.
-                    // You can use the intl package to format the value based on
-                    // the user's locale settings.
-                    child: Text(
-                      '${time.hour}:${time.minute}',
-                      style: const TextStyle(
-                        fontSize: 22.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              _DatePickerItem(
-                children: <Widget>[
-                  const Text('DateTime'),
-                  CupertinoButton(
-                    // Display a CupertinoDatePicker in dateTime picker mode.
-                    onPressed: () => _showDialog(
-                      CupertinoDatePicker(
-                        initialDateTime: dateTime,
-                        use24hFormat: true,
-                        // This is called when the user changes the dateTime.
-                        onDateTimeChanged: (DateTime newDateTime) {
-                          setState(() => dateTime = newDateTime);
-                        },
-                      ),
-                    ),
-                    // In this example, the time value is formatted manually. You
-                    // can use the intl package to format the value based on the
-                    // user's locale settings.
-                    child: Text(
-                      '${dateTime.month}-${dateTime.day}-${dateTime.year} ${dateTime.hour}:${dateTime.minute}',
-                      style: const TextStyle(
-                        fontSize: 22.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// This class simply decorates a row of widgets.
-class _DatePickerItem extends StatelessWidget {
-  const _DatePickerItem({required this.children});
-
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: CupertinoColors.inactiveGray,
-            width: 0.0,
-          ),
-          bottom: BorderSide(
-            color: CupertinoColors.inactiveGray,
-            width: 0.0,
-          ),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: children,
-        ),
-      ),
-    );
-  }
-}
-
 class _PhoneNumberInput extends StatelessWidget {
-  const _PhoneNumberInput();
+  final TextEditingController controller;
+  const _PhoneNumberInput({
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -438,6 +285,7 @@ class _PhoneNumberInput extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return TextFormField(
+      controller: controller,
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         filled: true,

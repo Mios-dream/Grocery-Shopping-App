@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../model/user.dart';
+import '../service/user_service.dart';
 import '../widget/app_bottom_nav_bar.dart';
 
 class UserScreen extends StatefulWidget {

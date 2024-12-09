@@ -1,12 +1,13 @@
 import 'package:sqlite3/sqlite3.dart';
 
 class UserDB {
-  static final UserDB _instance = UserDB._internal();
+  UserDB._internal();
+
   factory UserDB() => _instance;
 
-  static Database? _database;
+  static final UserDB _instance = UserDB._internal();
 
-  UserDB._internal();
+  static Database? _database;
 
   Database get database {
     if (_database != null) return _database!;
@@ -15,9 +16,8 @@ class UserDB {
   }
 
   Database _initDatabase() {
-    const path = './db/grocify.db';
-    Database db = sqlite3.open(path);
-    db.execute('''
+    const path = 'database/grocify.db';
+    final db = sqlite3.open(path)..execute('''
     CREATE TABLE IF NOT EXISTS user (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT UNIQUE NOT NULL,
@@ -29,14 +29,27 @@ class UserDB {
     return db;
   }
 
-  void insertData(String email, String userName, String passwordHash,
-      {String? phoneNumber}) {
+  void insertData(
+    String email,
+    String userName,
+    String passwordHash, {
+    String? phoneNumber,
+  }) {
+    /**
+     * 插入数据
+     * @param userName 用户名
+     * @param passwordHash 密码哈希值
+     * @param phoneNumber 手机号
+     */
     final dbHelper = UserDB();
     final db = dbHelper.database;
     phoneNumber ??= '';
-    db.execute('''
+    db.execute(
+      '''
       INSERT INTO user (email, username, password_hash, phone_number) VALUES (?, ?, ?, ?)
-      ''', [userName, email, passwordHash, phoneNumber]);
+      ''',
+      [email, userName, passwordHash, phoneNumber],
+    );
   }
 
   List<Map<String, dynamic>> queryData(String email, String passwordHash) {
@@ -46,32 +59,28 @@ class UserDB {
       SELECT * FROM user
       WHERE email = ?
       AND password_hash = ?
-    ''', [email, passwordHash]);
+    ''', [email, passwordHash],);
     return rows;
   }
 
   void updateUser(String email, String userName, String passwordHash,
-      {String phoneNumber = ''}) async {
+      {String phoneNumber = '',}) async {
     final dbHelper = UserDB();
-    final db = dbHelper.database;
-
-    db.execute('''
+    dbHelper.database.execute('''
     UPDATE user SET email = ?, username = ?, password_hash = ?, phone_number = ?
-    ''', [email, userName, passwordHash, phoneNumber]);
+    ''', [email, userName, passwordHash, phoneNumber],);
   }
 
   void deleteUser(int userID) async {
     final dbHelper = UserDB();
-    final db = dbHelper.database;
-    db.execute('''
+    dbHelper.database.execute('''
     DELETE FROM user WHERE id = ?
-    ''', [userID]);
+    ''', [userID],);
   }
 
   void closeDatabase() {
     final dbHelper = UserDB();
-    final db = dbHelper.database;
-    db.dispose();
+    dbHelper.database.dispose();
   }
 }
 

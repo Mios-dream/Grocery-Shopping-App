@@ -15,9 +15,8 @@ class ProductDatabase {
   }
 
   Database _initDatabase() {
-    const path = './db/grocify.db';
-    Database db = sqlite3.open(path);
-    db.execute('''
+    const path = 'database/grocify.db';
+    final db = sqlite3.open(path)..execute('''
     CREATE TABLE IF NOT EXISTS product (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT UNIQUE NOT NULL,
@@ -51,8 +50,7 @@ class ProductDatabase {
       required bool isPopular,
       required bool isTrending}) {
     final dbHelper = ProductDatabase();
-    final db = dbHelper.database;
-    db.execute('''
+    dbHelper.database.execute('''
       INSERT INTO product ( name, description, price, discounted_price, image_url, category_id, aisle_id, stock, unit, reviews, is_popular, is_trending) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ''', [
       name,
@@ -73,10 +71,13 @@ class ProductDatabase {
   List<Map<String, dynamic>> queryData(String name) {
     final dbHelper = ProductDatabase();
     final db = dbHelper.database;
-    final rows = db.select('''
+    final rows = db.select(
+      '''
       SELECT * FROM product
       WHERE name = ?
-    ''', [name]);
+    ''',
+      [name],
+    );
     return rows;
   }
 
@@ -94,8 +95,7 @@ class ProductDatabase {
       required bool isPopular,
       required bool isTrending}) async {
     final dbHelper = ProductDatabase();
-    final db = dbHelper.database;
-    db.execute('''
+    dbHelper.database.execute('''
     UPDATE product SET name = ?, description = ?, price = ?, discounted_price = ?, image_url = ?, category_id = ?, aisle_id = ?, stock = ?, unit = ?, reviews = ?, is_popular = ?, is_trending = ?
     ''', [
       name,
@@ -109,14 +109,13 @@ class ProductDatabase {
       unit,
       reviews,
       isPopular,
-      isTrending
+      isTrending,
     ]);
   }
 
   void updateProductFromJson(Map<String, dynamic> json) async {
     final dbHelper = ProductDatabase();
-    final db = dbHelper.database;
-    db.execute('''
+    dbHelper.database.execute('''
     UPDATE product SET name = ?, description = ?, price = ?, discounted_price = ?, image_url = ?, category_id = ?, aisle_id = ?, stock = ?, unit = ?, reviews = ?, is_popular = ?, is_trending = ?
     ''', [
       json['name'],
@@ -136,15 +135,16 @@ class ProductDatabase {
 
   void deleteUser(int productId) async {
     final dbHelper = ProductDatabase();
-    final db = dbHelper.database;
-    db.execute('''
+    dbHelper.database.execute(
+      '''
     DELETE FROM product WHERE id = ?
-    ''', [productId]);
+    ''',
+      [productId],
+    );
   }
 
   void closeDatabase() {
     final dbHelper = ProductDatabase();
-    final db = dbHelper.database;
-    db.dispose();
+    dbHelper.database.dispose();
   }
 }

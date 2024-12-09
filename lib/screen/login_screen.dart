@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:oktoast/oktoast.dart';
-import '../model/user.dart';
+import '../service/user_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -120,14 +120,15 @@ class _LoginCardState extends State<LoginCard> {
                   children: [
                     TextButton(
                         onPressed: () {
-                          context.pop();
+                          context.goNamed("home");
                         },
                         child: const Text("Cancel")),
                     TextButton(
-                        onPressed: () async {
-                          setState(() {
-                            isLogin = false;
-                          });
+                        onPressed: () {
+                          context.pushNamed("register");
+                          // setState(() {
+                          //   isLogin = false;
+                          // });
                         },
                         child: const Text("Register")),
                     TextButton(
@@ -213,7 +214,7 @@ class _LoginCardState extends State<LoginCard> {
                         },
                         child: const Text("Cancel")),
                     TextButton(
-                        onPressed: () async {
+                        onPressed: () {
                           if (!checkLogin()) {
                             return;
                           }
@@ -223,13 +224,13 @@ class _LoginCardState extends State<LoginCard> {
                             username: usernameController.text,
                             phoneNumber: phoneNumberController.text,
                           );
-                          LoginStatus status =
-                              await UserService.registerUser(user);
-                          if (status == LoginStatus.success) {
-                            showToast("Register success");
-                          } else if (status == LoginStatus.exist) {
-                            showToast("User already exist");
-                          }
+                          UserService.registerUser(user).then((status) {
+                            if (status == LoginStatus.success) {
+                              showToast("Register success");
+                            } else if (status == LoginStatus.exist) {
+                              showToast("User already exist");
+                            }
+                          });
                         },
                         child: const Text("Register")),
                   ],

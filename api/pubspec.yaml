@@ -14,6 +14,8 @@ dependencies:
   dart_frog: ^1.0.0
   model:
     path: packages/model
+  db:
+    path: packages/db
   network_info_plus: ^6.1.0
   product_repo:
     path: packages/product_repo
