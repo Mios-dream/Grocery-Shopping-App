@@ -1,9 +1,9 @@
 import 'package:sqlite3/sqlite3.dart';
 
 class UserDB {
-  UserDB._internal();
 
   factory UserDB() => _instance;
+  UserDB._internal();
 
   static final UserDB _instance = UserDB._internal();
 
@@ -63,7 +63,7 @@ class UserDB {
     return rows;
   }
 
-  void updateUser(String email, String userName, String passwordHash,
+  Future<void> updateUser(String email, String userName, String passwordHash,
       {String phoneNumber = '',}) async {
     final dbHelper = UserDB();
     dbHelper.database.execute('''
@@ -71,7 +71,7 @@ class UserDB {
     ''', [email, userName, passwordHash, phoneNumber],);
   }
 
-  void deleteUser(int userID) async {
+  Future<void> deleteUser(int userID) async {
     final dbHelper = UserDB();
     dbHelper.database.execute('''
     DELETE FROM user WHERE id = ?

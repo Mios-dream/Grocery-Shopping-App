@@ -1,12 +1,12 @@
 import 'package:sqlite3/sqlite3.dart';
 
 class ProductDatabase {
-  static final ProductDatabase _instance = ProductDatabase._internal();
   factory ProductDatabase() => _instance;
 
-  static Database? _database;
-
   ProductDatabase._internal();
+  static final ProductDatabase _instance = ProductDatabase._internal();
+
+  static Database? _database;
 
   Database get database {
     if (_database != null) return _database!;
@@ -48,7 +48,7 @@ class ProductDatabase {
       required String unit,
       required String reviews,
       required bool isPopular,
-      required bool isTrending}) {
+      required bool isTrending,}) {
     final dbHelper = ProductDatabase();
     dbHelper.database.execute('''
       INSERT INTO product ( name, description, price, discounted_price, image_url, category_id, aisle_id, stock, unit, reviews, is_popular, is_trending) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -64,7 +64,7 @@ class ProductDatabase {
       unit,
       reviews,
       isPopular,
-      isTrending
+      isTrending,
     ]);
   }
 
@@ -81,7 +81,7 @@ class ProductDatabase {
     return rows;
   }
 
-  void updateProduct(
+  Future<void> updateProduct(
       {required String name,
       required String description,
       required double price,
@@ -93,7 +93,7 @@ class ProductDatabase {
       required String unit,
       required String reviews,
       required bool isPopular,
-      required bool isTrending}) async {
+      required bool isTrending,}) async {
     final dbHelper = ProductDatabase();
     dbHelper.database.execute('''
     UPDATE product SET name = ?, description = ?, price = ?, discounted_price = ?, image_url = ?, category_id = ?, aisle_id = ?, stock = ?, unit = ?, reviews = ?, is_popular = ?, is_trending = ?
@@ -113,7 +113,7 @@ class ProductDatabase {
     ]);
   }
 
-  void updateProductFromJson(Map<String, dynamic> json) async {
+  Future<void> updateProductFromJson(Map<String, dynamic> json) async {
     final dbHelper = ProductDatabase();
     dbHelper.database.execute('''
     UPDATE product SET name = ?, description = ?, price = ?, discounted_price = ?, image_url = ?, category_id = ?, aisle_id = ?, stock = ?, unit = ?, reviews = ?, is_popular = ?, is_trending = ?
@@ -129,11 +129,11 @@ class ProductDatabase {
       json['unit'],
       json['reviews'],
       json['is_popular'],
-      json['is_trending']
+      json['is_trending'],
     ]);
   }
 
-  void deleteUser(int productId) async {
+  Future<void> deleteUser(int productId) async {
     final dbHelper = ProductDatabase();
     dbHelper.database.execute(
       '''

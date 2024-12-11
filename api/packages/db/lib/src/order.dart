@@ -2,12 +2,12 @@ import 'package:sqlite3/sqlite3.dart';
 import 'package:uuid/uuid.dart';
 
 class OrderDatabase {
-  static final OrderDatabase _instance = OrderDatabase._internal();
   factory OrderDatabase() => _instance;
 
-  static Database? _database;
-
   OrderDatabase._internal();
+  static final OrderDatabase _instance = OrderDatabase._internal();
+
+  static Database? _database;
 
   Database get database {
     if (_database != null) return _database!;
@@ -31,7 +31,7 @@ class OrderDatabase {
   }
 
   String createOrder(
-      {required String userId, required double amount, required String items}) {
+      {required String userId, required double amount, required String items,}) {
     final dbHelper = OrderDatabase();
     final db = dbHelper.database;
     final orderId = const Uuid().v4();
@@ -63,7 +63,7 @@ class OrderDatabase {
     final rows = db.select('''
       SELECT * FROM orders
       WHERE order_id = ?
-    ''', [orderId]);
+    ''', [orderId],);
     return rows;
   }
 
@@ -71,7 +71,7 @@ class OrderDatabase {
     return true;
   }
 
-  void deleteOrder({required String orderId, required String userId}) async {
+  Future<void> deleteOrder({required String orderId, required String userId}) async {
     final dbHelper = OrderDatabase();
     dbHelper.database.execute(
       '''
